@@ -7,4 +7,6 @@ public interface View {
   void showConnectedDeviceNotification(Device device);
 
   void showErrorConnectingDeviceNotification(Device device);
+
+  void showADBNotInstalledNotification();
 }

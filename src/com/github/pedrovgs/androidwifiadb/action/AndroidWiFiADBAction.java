@@ -52,6 +52,11 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         NotificationType.INFORMATION);
   }
 
+  @Override public void showADBNotInstalledNotification() {
+    showNotification(ANDROID_WIFI_ADB_TITLE,
+        "'adb' command not found. Review your Android SDK installation.", NotificationType.ERROR);
+  }
+
   private void showNotification(final String title, final String message,
       final NotificationType type) {
     ApplicationManager.getApplication().invokeLater(new Runnable() {

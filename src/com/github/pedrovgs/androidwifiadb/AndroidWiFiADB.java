@@ -14,6 +14,10 @@ public class AndroidWiFiADB {
   }
 
   public void connectDevices() {
+    if (!isADBInstalled()) {
+      view.showADBNotInstalledNotification();
+      return;
+    }
     List<Device> devices = adb.getDevicesConnectedByUSB();
     if (devices.isEmpty()) {
       view.showNoConnectedDevicesNotification();
@@ -28,5 +32,9 @@ public class AndroidWiFiADB {
         view.showErrorConnectingDeviceNotification(device);
       }
     }
+  }
+
+  private boolean isADBInstalled() {
+    return adb.isInstalled();
   }
 }

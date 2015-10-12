@@ -13,6 +13,10 @@ public class ADB {
     this.adbParser = adbParser;
   }
 
+  public boolean isInstalled() {
+    return !commandLine.executeCommand("adb version").isEmpty();
+  }
+
   public List<Device> getDevicesConnectedByUSB() {
     String adbDevicesOutput = commandLine.executeCommand("adb devices");
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
