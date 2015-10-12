@@ -1,5 +1,6 @@
 package com.github.pedrovgs.androidwifiadb;
 
+import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import java.util.List;
 
 public class AndroidWiFiADB {

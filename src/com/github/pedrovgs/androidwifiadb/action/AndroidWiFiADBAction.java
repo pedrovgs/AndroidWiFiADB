@@ -1,6 +1,6 @@
 package com.github.pedrovgs.androidwifiadb.action;
 
-import com.github.pedrovgs.androidwifiadb.ADB;
+import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.View;
