@@ -13,6 +13,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 
 public class AndroidWiFiADBAction extends AnAction implements View {
 
@@ -35,6 +36,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         androidWifiADB.connectDevices();
       }
     }).start();
+
   }
 
   @Override public void showNoConnectedDevicesNotification() {
