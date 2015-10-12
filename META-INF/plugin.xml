@@ -33,10 +33,11 @@
   <actions>
 
     <action id="AndroidWiFiADB"
-        class="com.github.pedrovgs.androidwifiadb.action.AndroidWiFiADBAction" text="AndroidWiFiADB"
+        class="com.github.pedrovgs.androidwifiadb.action.ui.AndroidWiFiADBAction" text="AndroidWiFiADB"
         description="Description">
-      <add-to-group group-id="ToolsMenu" anchor="last"/>
+      <add-to-group group-id="MainToolBar" anchor="before" relative-to-action="SearchEverywhere"/>
     </action>
+
   </actions>
 
 </idea-plugin>

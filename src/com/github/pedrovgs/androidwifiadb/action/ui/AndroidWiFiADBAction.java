@@ -1,4 +1,4 @@
-package com.github.pedrovgs.androidwifiadb.action;
+package com.github.pedrovgs.androidwifiadb.action.ui;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
