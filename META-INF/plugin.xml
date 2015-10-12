@@ -36,7 +36,6 @@
         class="com.github.pedrovgs.androidwifiadb.action.AndroidWiFiADBAction" text="AndroidWiFiADB"
         description="Description">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="alt C"/>
     </action>
   </actions>
 
