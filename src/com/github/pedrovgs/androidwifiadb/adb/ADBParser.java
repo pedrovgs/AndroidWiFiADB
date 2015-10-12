@@ -7,7 +7,7 @@ import java.util.List;
 public class ADBParser {
 
   public List<Device> parseGetDevicesOutput(String adbDevicesOutput) {
-    List<Device> devices = new LinkedList<>();
+    List<Device> devices = new LinkedList<Device>();
     String[] splittedOutput = adbDevicesOutput.split("\\n");
     for (String line : splittedOutput) {
       String[] deviceLine = line.split("\\t");
