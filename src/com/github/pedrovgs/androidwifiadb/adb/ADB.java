@@ -13,7 +13,7 @@ public class ADB {
     this.adbParser = adbParser;
   }
 
-  public List<Device> getDevices() {
+  public List<Device> getDevicesConnectedByUSB() {
     String adbDevicesOutput = commandLine.executeCommand("adb devices");
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }

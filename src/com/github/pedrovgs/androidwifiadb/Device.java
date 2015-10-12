@@ -19,11 +19,11 @@ public class Device {
     return id;
   }
 
-  public void setConnected(boolean connected) {
-    this.connected = connected;
-  }
-
   public boolean isConnected() {
     return connected;
+  }
+
+  public void setConnected(boolean connected) {
+    this.connected = connected;
   }
 }

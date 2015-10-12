@@ -13,7 +13,6 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
-import java.util.List;
 
 public class AndroidWiFiADBAction extends AnAction implements View {
 
@@ -39,7 +38,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
   }
 
   @Override public void showNoConnectedDevicesNotification() {
-    showNotification(ANDROID_WIFI_ADB_TITLE, "There are no connected devices with a USB cable.",
+    showNotification(ANDROID_WIFI_ADB_TITLE, "There are no devices connected with a USB cable.",
         NotificationType.INFORMATION);
   }
 
