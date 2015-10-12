@@ -33,7 +33,7 @@
   <actions>
 
     <action id="AndroidWiFiADB"
-        class="com.github.pedrovgs.androidwifiadb.AndroidWiFiADBAction"
+        class="com.github.pedrovgs.androidwifiadb.action.AndroidWiFiADBAction"
         text="AndroidWiFiADB"
         description="Description"
         icon="/icons/androidWiFiADBIcon.png"
