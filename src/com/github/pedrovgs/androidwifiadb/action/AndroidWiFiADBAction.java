@@ -1,9 +1,11 @@
 package com.github.pedrovgs.androidwifiadb.action;
 
-import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.View;
+import com.github.pedrovgs.androidwifiadb.adb.ADB;
+import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
+import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationGroup;
 import com.intellij.notification.NotificationType;
@@ -24,7 +26,9 @@ public class AndroidWiFiADBAction extends AnAction implements View {
   private final AndroidWiFiADB androidWifiADB;
 
   public AndroidWiFiADBAction() {
-    ADB adb = new ADB();
+    CommandLine commandLine = new CommandLine();
+    ADBParser adbParser = new ADBParser();
+    ADB adb = new ADB(commandLine, adbParser);
     this.androidWifiADB = new AndroidWiFiADB(adb, this);
   }
 
