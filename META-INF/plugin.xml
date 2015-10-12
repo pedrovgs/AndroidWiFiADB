@@ -35,7 +35,7 @@
     <action id="AndroidWiFiADB"
         class="com.github.pedrovgs.androidwifiadb.action.AndroidWiFiADBAction"
         text="AndroidWiFiADB"
-        description="Description"
+        description="Connects your Android devices to your computer over TCP just with one click."
         icon="/icons/androidWiFiADBIcon.png"
         >
       <add-to-group group-id="MainToolBar" anchor="last"/>
