@@ -17,9 +17,16 @@ public class AndroidWiFiADB {
     List<Device> devices = adb.getDevices();
     if (devices.isEmpty()) {
       view.showNoConnectedDevicesNotification();
-    } else {
-      adb.connectDevices(devices);
-      view.showConnectedDevicesNotification(devices);
+      return;
+    }
+
+    devices = adb.connectDevices(devices);
+    for (Device device : devices) {
+      if (device.isConnected()) {
+        view.showConnectedDeviceNotification(device);
+      } else {
+        view.showErrorConnectingDeviceNotification(device);
+      }
     }
   }
 }

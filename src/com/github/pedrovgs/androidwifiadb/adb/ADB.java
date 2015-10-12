@@ -18,15 +18,17 @@ public class ADB {
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }
 
-  public void connectDevices(List<Device> devices) {
+  public List<Device> connectDevices(List<Device> devices) {
     for (Device device : devices) {
-      connectDeviceByIp(device);
+      boolean connected = connectDeviceByIp(device);
+      device.setConnected(connected);
     }
+    return devices;
   }
 
-  private void connectDeviceByIp(Device device) {
+  private boolean connectDeviceByIp(Device device) {
     String deviceIp = getDeviceIp(device);
-    connectDevice(deviceIp);
+    return connectDevice(deviceIp);
   }
 
   private String getDeviceIp(Device device) {
@@ -35,8 +37,9 @@ public class ADB {
     return adbParser.parseGetDeviceIp(ipInfoOutput);
   }
 
-  private void connectDevice(String deviceIp) {
+  private boolean connectDevice(String deviceIp) {
     commandLine.executeCommand("adb tcpip 5555");
-    commandLine.executeCommand("adb connect " + deviceIp);
+    String connectOutput = commandLine.executeCommand("adb connect " + deviceIp);
+    return connectOutput.contains("connected");
   }
 }

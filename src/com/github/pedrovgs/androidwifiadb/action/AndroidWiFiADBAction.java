@@ -13,8 +13,6 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import java.util.List;
 
 public class AndroidWiFiADBAction extends AnAction implements View {
@@ -38,7 +36,6 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         androidWifiADB.connectDevices();
       }
     }).start();
-
   }
 
   @Override public void showNoConnectedDevicesNotification() {
@@ -46,11 +43,14 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         NotificationType.INFORMATION);
   }
 
-  @Override public void showConnectedDevicesNotification(List<Device> devices) {
-    for (Device device : devices) {
-      showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' connected.",
-          NotificationType.INFORMATION);
-    }
+  @Override public void showConnectedDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' connected.",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showErrorConnectingDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE, "Unable to connect device '" + device.getName() + "'.",
+        NotificationType.INFORMATION);
   }
 
   private void showNotification(final String title, final String message,
@@ -59,8 +59,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
       @Override public void run() {
         Notification notification =
             NOTIFICATION_GROUP.createNotification(title, message, type, null);
-        Project[] projects = ProjectManager.getInstance().getOpenProjects();
-        Notifications.Bus.notify(notification, projects[0]);
+        Notifications.Bus.notify(notification);
       }
     });
   }

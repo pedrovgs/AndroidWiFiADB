@@ -25,10 +25,9 @@ public class ADBParser {
   }
 
   public String parseGetDeviceIp(String ipInfoOutput) {
-    String ip = "";
     String[] splittedOutput = ipInfoOutput.split("\\n");
     int end = splittedOutput[1].indexOf("/");
     int start = splittedOutput[1].indexOf("t");
-    return splittedOutput[1].substring(start + 1, end - 1);
+    return splittedOutput[1].substring(start + 2, end);
   }
 }

@@ -4,6 +4,7 @@ public class Device {
 
   private final String name;
   private final String id;
+  private boolean connected;
 
   public Device(String name, String id) {
     this.name = name;
@@ -16,5 +17,13 @@ public class Device {
 
   public String getId() {
     return id;
+  }
+
+  public void setConnected(boolean connected) {
+    this.connected = connected;
+  }
+
+  public boolean isConnected() {
+    return connected;
   }
 }
