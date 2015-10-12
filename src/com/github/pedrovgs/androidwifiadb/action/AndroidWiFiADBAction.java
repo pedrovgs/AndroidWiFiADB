@@ -33,7 +33,12 @@ public class AndroidWiFiADBAction extends AnAction implements View {
   }
 
   public void actionPerformed(AnActionEvent event) {
-    androidWifiADB.connectDevices();
+    new Thread(new Runnable() {
+      @Override public void run() {
+        androidWifiADB.connectDevices();
+      }
+    }).start();
+
   }
 
   @Override public void showNoConnectedDevicesNotification() {
