@@ -1,43 +1,37 @@
 <idea-plugin version="2">
-  <id>com.yourcompany.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>com.github.pedrovgs.androidwifiadb</id>
+  <name>Android WiFi ADB</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="pedrovicente.gomez@gmail.com.com" url="http://www.github.com/pedrovgs">Pedro
+    Vicente Gómez Sánchez
+  </vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
-    ]]></description>
+      Provides an action which allow you quickly connect your Android device over WiFi to install, run and debug your applications without a USB connected.
+    ]]>
+  </description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      1.0.0: Initial version.
     ]]>
   </change-notes>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="131"/>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
-
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+
   </extensions>
 
   <application-components>
-    <!-- Add your application components here -->
+
   </application-components>
 
   <project-components>
-    <!-- Add your project components here -->
+
   </project-components>
 
   <actions>
-    <!-- Add your actions here -->
+
   </actions>
 
 </idea-plugin>
