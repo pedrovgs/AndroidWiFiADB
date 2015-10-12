@@ -33,9 +33,12 @@
   <actions>
 
     <action id="AndroidWiFiADB"
-        class="com.github.pedrovgs.androidwifiadb.action.ui.AndroidWiFiADBAction" text="AndroidWiFiADB"
-        description="Description">
-      <add-to-group group-id="MainToolBar" anchor="before" relative-to-action="SearchEverywhere"/>
+        class="com.github.pedrovgs.androidwifiadb.action.ui.AndroidWiFiADBAction"
+        text="AndroidWiFiADB"
+        description="Description"
+        icon="/icons/androidWiFiADBIcon.png"
+        >
+      <add-to-group group-id="MainToolBar" anchor="last"/>
     </action>
 
   </actions>
