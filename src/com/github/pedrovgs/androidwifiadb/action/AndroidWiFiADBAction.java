@@ -1,5 +1,6 @@
 package com.github.pedrovgs.androidwifiadb.action;
 
+import com.android.ddmlib.AndroidDebugBridge;
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.View;
@@ -14,6 +15,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.impl.SdkFinder;
 
 public class AndroidWiFiADBAction extends AnAction implements View {
 

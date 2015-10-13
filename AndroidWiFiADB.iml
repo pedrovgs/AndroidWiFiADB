@@ -11,5 +11,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mockito-all-1.10.19" level="project" />
+    <orderEntry type="library" name="ddmlib-24.3.1" level="project" />
   </component>
 </module>
