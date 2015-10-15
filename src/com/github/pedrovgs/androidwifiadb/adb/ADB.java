@@ -23,7 +23,7 @@ public class ADB {
   }
 
   public List<Device> getDevicesConnectedByUSB() {
-    String getDevicesCommand = getCommand("devices");
+    String getDevicesCommand = getCommand("devices -l");
     String adbDevicesOutput = commandLine.executeCommand(getDevicesCommand);
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }
