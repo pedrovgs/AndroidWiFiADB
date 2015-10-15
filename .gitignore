@@ -1,7 +1,5 @@
 # IntelliJ
 out/
-.idea/
-*.iml
 
 ### Java ###
 *.class
