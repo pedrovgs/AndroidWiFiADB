@@ -14,8 +14,8 @@ public class ADBParser {
     String[] splittedOutput = adbDevicesOutput.split("\\n");
     for (String line : splittedOutput) {
       String[] deviceLine = line.split("\\t");
-      String id = deviceLine[0];
-      if (id.contains(".") || id.contains("List of devices")) {
+      String id = deviceLine[0].substring(0, deviceLine[0].indexOf(" "));
+      if (id.contains(".") || id.contains("List")) {
         continue;
       }
       int start = line.indexOf(MODEL_INDICATOR) + MODEL_INDICATOR.length();
