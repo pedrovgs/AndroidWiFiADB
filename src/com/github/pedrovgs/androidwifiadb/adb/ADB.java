@@ -1,45 +1,30 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
-import com.android.ddmlib.AndroidDebugBridge;
-import com.android.ddmlib.IDevice;
 import com.github.pedrovgs.androidwifiadb.Device;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTypeId;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ADB {
 
-  private static final String ADB_PATH = "$ANDROID_HOME/platform-tools/adb";
+  private static final String ANDROID_ENV_VAR_NAME = "ANDROID_HOME";
+  private static final String ADB_RELATIVE_PATH = "/platform-tools/adb";
 
   private final CommandLine commandLine;
   private final ADBParser adbParser;
-  private final AndroidDebugBridge androidDebugBridge;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
     this.adbParser = adbParser;
-    AndroidDebugBridge.init(true);
-    AndroidDebugBridge.createBridge();
-    this.androidDebugBridge =  AndroidDebugBridge.getBridge();
-
   }
 
   public boolean isInstalled() {
-    return androidDebugBridge.isConnected();
+    String versionCommand = getCommand("version");
+    return !commandLine.executeCommand(versionCommand).isEmpty();
   }
 
   public List<Device> getDevicesConnectedByUSB() {
-    IDevice[] adbDevices = androidDebugBridge.getDevices();
-    List<Device> devices = new LinkedList<Device>();
-    for (IDevice adbDevice : adbDevices) {
-      String name = adbDevice.getName();
-      String id = adbDevice.getAvdName();
-      Device device = new Device(name, id);
-      devices.add(device);
-    }
-    return devices;
+    String getDevicesCommand = getCommand("devices");
+    String adbDevicesOutput = commandLine.executeCommand(getDevicesCommand);
+    return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }
 
   public List<Device> connectDevices(List<Device> devices) {
@@ -56,14 +41,29 @@ public class ADB {
   }
 
   private String getDeviceIp(Device device) {
-    String ipInfoOutput = commandLine.executeCommand(
-        ADB_PATH + " -s " + device.getId() + " shell ip -f inet addr show wlan0");
+    String getDeviceIpCommand =
+        getCommand("-s " + device.getId() + " shell ip -f inet addr show wlan0");
+    String ipInfoOutput = commandLine.executeCommand(getDeviceIpCommand);
     return adbParser.parseGetDeviceIp(ipInfoOutput);
   }
 
   private boolean connectDevice(String deviceIp) {
-    commandLine.executeCommand(ADB_PATH + "tcpip 5555");
-    String connectOutput = commandLine.executeCommand(ADB_PATH + "connect " + deviceIp);
+    String enableTCPCommand = getCommand("tcpip 5555");
+    commandLine.executeCommand(enableTCPCommand);
+    String connectDeviceCommand = getCommand("connect " + deviceIp);
+    String connectOutput = commandLine.executeCommand(connectDeviceCommand);
     return connectOutput.contains("connected");
+  }
+
+  private String getAdbPath() {
+    String androidSdkPath = System.getenv().get(ANDROID_ENV_VAR_NAME);
+    if (androidSdkPath == null) {
+      return "";
+    }
+    return androidSdkPath + ADB_RELATIVE_PATH;
+  }
+
+  private String getCommand(String command) {
+    return getAdbPath() + " " + command;
   }
 }
