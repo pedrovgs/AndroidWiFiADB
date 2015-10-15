@@ -1,6 +1,7 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
 import com.github.pedrovgs.androidwifiadb.Device;
+import com.intellij.util.EnvironmentUtil;
 import java.util.List;
 
 public class ADB {
@@ -56,7 +57,7 @@ public class ADB {
   }
 
   private String getAdbPath() {
-    String androidSdkPath = System.getenv().get(ANDROID_ENV_VAR_NAME);
+    String androidSdkPath = EnvironmentUtil.getValue(ANDROID_ENV_VAR_NAME);
     if (androidSdkPath == null) {
       return "";
     }
