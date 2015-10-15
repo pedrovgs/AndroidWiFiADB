@@ -1,0 +1,26 @@
+plugins {
+  id "org.jetbrains.intellij" version "0.0.23"
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+group 'com.github.pedrovgs'
+version '1.0.0'
+
+sourceCompatibility = 1.6
+
+repositories {
+  mavenCentral()
+}
+
+intellij {
+  version '14.1.5'
+  pluginName 'AndroidWiFiADB'
+  plugins 'android'
+}
+
+dependencies {
+  compile 'junit:junit:4.12'
+  compile 'org.mockito:mockito-all:1.10.19'
+}
