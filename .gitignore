@@ -1,5 +1,6 @@
 # IntelliJ
 out/
+.idea/workspace.xml
 
 ### Java ###
 *.class
