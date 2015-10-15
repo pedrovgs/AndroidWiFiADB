@@ -47,7 +47,7 @@ public class AndroidWiFiADBTest extends UnitTest {
     }
   }
 
-  @Test public void shouldShowDeviceConnectionErrorWhenConnectionIsNotExtablished() {
+  @Test public void shouldShowDeviceConnectionErrorWhenConnectionIsNotEstablished() {
     AndroidWiFiADB sut = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreNotConnectedSuccessfully(devices);

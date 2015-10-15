@@ -74,6 +74,14 @@ public class ADBParserTest extends UnitTest {
     assertEquals("192.168.1.128", deviceIp);
   }
 
+  @Test public void shouldReturnEmptyIfDeviceIpIsAnEmptyString() {
+    ADBParser parser = givenAADBParser();
+
+    String deviceIp = parser.parseGetDeviceIp("");
+
+    assertEquals("", deviceIp);
+  }
+
   private ADBParser givenAADBParser() {
     return new ADBParser();
   }

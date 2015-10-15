@@ -38,7 +38,11 @@ public class ADB {
 
   private boolean connectDeviceByIp(Device device) {
     String deviceIp = getDeviceIp(device);
-    return connectDevice(deviceIp);
+    if (deviceIp.isEmpty()) {
+      return false;
+    } else {
+      return connectDevice(deviceIp);
+    }
   }
 
   private String getDeviceIp(Device device) {
