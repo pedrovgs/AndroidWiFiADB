@@ -1,10 +1,10 @@
-Android WiFi ADB IntelliJ/Android Studio Plugin
+Android WiFi ADB - IntelliJ/Android Studio Plugin
 ===============================================
 ![Android WiFi ADB][1]
 
 **IntelliJ and Android Studio plugin** created to **quickly connect your Android device over WiFi** to install, run and debug your applications without a USB connected. Press one button and forget about your USB cable.
 
-Android WiFI ADB plugin adds a button ![Android WiFi ADB Button][5] to your IntelliJ/Android Studio Toolbar you have to press to connect your device to your computer over WiFi.  
+**Android WiFI ADB** plugin adds a button ![Android WiFi ADB Button][5] to your IntelliJ/Android Studio Toolbar to connect your device to your computer over WiFi.  
 
 Screenshots
 -----------
@@ -14,16 +14,16 @@ Screenshots
 Installation
 ========
 
-Download and install *Android WiFi ADB* directly from Intellij / Android Studio:
+Download and install **Android WiFi ADB* directly from Intellij / Android Studio:
 `Preferences/Settings->Plugins->Browse Repositories` 
 
 Alternatively, you can [download the plugin](http://plugins.jetbrains.com) from the JetBrains plugin site and install it manually in:
-`Preferences/Settings->Plugins->Install plugin from disk` 
+`Preferences/Settings->Plugins->Install plugin from disk`. 
 
 Do you want to contribute?
 --------------------------
 
-Please, do it! If you have any improvement or any idea send a pull request with the code or open an issue :)
+Please, do it! If you have any improvement or you've found any bug, send a pull request with the code or open an issue :)
 
 Libraries used on the sample project
 ------------------------------------
