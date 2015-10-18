@@ -65,4 +65,4 @@ License
 [3]: https://github.com/junit-team/junit
 [4]: https://github.com/mockito/mockito
 [5]: ./art/sampleButton.png
-[6]: ./AndroidWiFiADB.zip
+[6]: https://plugins.jetbrains.com/plugin/7983?pr=

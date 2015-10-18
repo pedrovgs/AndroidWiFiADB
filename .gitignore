@@ -8,6 +8,9 @@ out/
 # Package Files #
 *.jar
 
+### Specific ###
+*.zip
+
 ### Gradle ###
 .gradle
 build/
