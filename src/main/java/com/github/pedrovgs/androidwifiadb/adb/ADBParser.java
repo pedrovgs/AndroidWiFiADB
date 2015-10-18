@@ -18,7 +18,8 @@ public class ADBParser {
     if (splittedOutput.length == 1) {
       return devices;
     }
-    for (String line : splittedOutput) {
+    for (int i = 1; i < splittedOutput.length; i++) {
+      String line = splittedOutput[i];
       String[] deviceLine = line.split("\\t");
       String id = deviceLine[0].substring(0, deviceLine[0].indexOf(" "));
       if (id.contains(IP_SEPARATOR)) {
