@@ -65,7 +65,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
 
   @Override public void showErrorConnectingDeviceNotification(Device device) {
     showNotification(ANDROID_WIFI_ADB_TITLE,
-        "Unable to connect device '" + device.getName() + "'. Review your device WiFi connection.",
+        "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
         NotificationType.INFORMATION);
   }
 
