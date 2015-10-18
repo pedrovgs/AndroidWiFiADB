@@ -2,8 +2,9 @@ Android WiFi ADB IntelliJ/Android Studio Plugin
 ===============================================
 ![Android WiFi ADB][1]
 
-**IntelliJ and Android Studio plugin** created to **quickly connect your Android device over WiFi** to install, run and debug your applications without a USB connected. Press one button and forget about your USB cable..
-Android WiFI ADB plugin adds a button to your IntelliJ/Android Studio Toolbar you have to press to connect your device to your computer over WiFi.  
+**IntelliJ and Android Studio plugin** created to **quickly connect your Android device over WiFi** to install, run and debug your applications without a USB connected. Press one button and forget about your USB cable.
+
+Android WiFI ADB plugin adds a button ![Android WiFi ADB Button][5] to your IntelliJ/Android Studio Toolbar you have to press to connect your device to your computer over WiFi.  
 
 Screenshots
 -----------
@@ -63,3 +64,4 @@ License
 [2]: ./screenshot1.gif
 [3]: https://github.com/junit-team/junit
 [4]: https://github.com/mockito/mockito
+[5]: ./sampleButton.png
