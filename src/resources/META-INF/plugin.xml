@@ -8,6 +8,8 @@
 
   <description><![CDATA[
       Provides an action which allow you quickly connect your Android device over WiFi to install, run and debug your applications without a USB connected by pressing one button.
+
+      Connect your device using a USB cable and press the Android WiFi ADB button. Once the device be connected over WiFi you'll see an IntelliJ/Android Studio notification. Now you can disconnect your USB cable and enjoy deploying, running and debugging your applications over WiFi.
     ]]>
   </description>
 
