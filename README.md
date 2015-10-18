@@ -10,6 +10,15 @@ Screenshots
 
 ![Android WiFi ADB Usage][2]
 
+Installation
+========
+
+Download and install *Android WiFi ADB* directly from Intellij / Android Studio:
+`Preferences/Settings->Plugins->Browse Repositories` 
+
+Alternatively, you can [download the plugin](http://plugins.jetbrains.com) from the JetBrains plugin site and install it manually in:
+`Preferences/Settings->Plugins->Install plugin from disk` 
+
 Do you want to contribute?
 --------------------------
 
