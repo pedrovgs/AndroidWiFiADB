@@ -1,4 +1,5 @@
 # IntelliJ
+# Some IntelliJ metadata files are in the repository to facilitate the plugin development.
 out/
 .idea/workspace.xml
 
