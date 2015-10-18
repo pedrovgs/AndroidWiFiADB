@@ -61,7 +61,7 @@ License
     limitations under the License.
 
 [1]: ./art/AndroidWiFiADBIcon.png
-[2]: ./screenshot1.gif
+[2]: ./art/screenshot1.gif
 [3]: https://github.com/junit-team/junit
 [4]: https://github.com/mockito/mockito
-[5]: ./sampleButton.png
+[5]: ./art/sampleButton.png
