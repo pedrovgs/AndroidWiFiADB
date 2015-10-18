@@ -1,4 +1,5 @@
 # IntelliJ
+# Some IntelliJ metadata files are in the repository to facilitate the plugin development.
 out/
 .idea/
 target/
@@ -12,6 +13,9 @@ target/
 ### Gradle ###
 .gradle
 build/
+
+### Specific ###
+*.zip
 
 # Ignore Gradle GUI config
 gradle-app.setting
