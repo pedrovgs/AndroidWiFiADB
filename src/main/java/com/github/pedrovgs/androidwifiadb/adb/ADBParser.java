@@ -19,7 +19,6 @@ package com.github.pedrovgs.androidwifiadb.adb;
 import com.github.pedrovgs.androidwifiadb.Device;
 import java.util.LinkedList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 public class ADBParser {
 
@@ -27,9 +26,8 @@ public class ADBParser {
   private static final String DEVICE_INDICATOR = "device:";
   private static final String IP_SEPARATOR = ".";
   private static final String END_DEVICE_IP_INDICATOR = "/";
-  private static final String START_DEVICE_IP_INDICATOR = "t";
+  private static final String START_DEVICE_IP_INDICATOR = "inet";
   private static final String ERROR_PARSING_DEVICE_IP_KEY = "Object";
-  private static final String DEVICE_IP_KEY = "192";
 
   public List<Device> parseGetDevicesOutput(String adbDevicesOutput) {
     List<Device> devices = new LinkedList<Device>();
@@ -44,30 +42,30 @@ public class ADBParser {
       if (id.contains(IP_SEPARATOR)) {
         continue;
       }
-      Device device = parseDevice(line, id);
+      String name = parseDeviceName(line);
+      Device device = new Device(name, id);
       devices.add(device);
     }
     return devices;
   }
 
-  @NotNull private Device parseDevice(String line, String id) {
+  private String parseDeviceName(String line) {
     int start = line.indexOf(MODEL_INDICATOR) + MODEL_INDICATOR.length();
     int end = line.indexOf(DEVICE_INDICATOR) - 1;
     if (end < 0) {
-      end = line.indexOf(" ");
+      end = line.length();
     }
-    String name = line.substring(start, end);
-    return new Device(name, id);
+    return line.substring(start, end);
   }
 
   public String parseGetDeviceIp(String ipInfo) {
+
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
     }
     String[] splittedOutput = ipInfo.split("\\n");
     int end = splittedOutput[1].indexOf(END_DEVICE_IP_INDICATOR);
-    int start = splittedOutput[1].indexOf(START_DEVICE_IP_INDICATOR);
-    return splittedOutput[1].substring(start + 2, end);
+    int start = splittedOutput[1].indexOf(START_DEVICE_IP_INDICATOR) + 5;
+    return splittedOutput[1].substring(start, end);
   }
-
 }

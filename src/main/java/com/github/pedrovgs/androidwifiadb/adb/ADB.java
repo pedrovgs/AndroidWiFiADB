@@ -65,8 +65,7 @@ public class ADB {
     String getDeviceIpCommand =
         getCommand("-s " + device.getId() + " shell ip -f inet addr show wlan0");
     String ipInfoOutput = commandLine.executeCommand(getDeviceIpCommand);
-    String deviceIp = adbParser.parseGetDeviceIp(ipInfoOutput);
-    return deviceIp;
+    return adbParser.parseGetDeviceIp(ipInfoOutput);
   }
 
   private boolean connectDevice(String deviceIp) {
