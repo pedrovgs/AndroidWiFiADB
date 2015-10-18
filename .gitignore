@@ -12,6 +12,9 @@ out/
 .gradle
 build/
 
+### Specific ###
+*.zip
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
