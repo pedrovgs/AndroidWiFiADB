@@ -50,7 +50,7 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://raw.github.com/pedrovgs/AndroidWiFiADB/master/art/AndroidWiFiADBIcon.png
-[2]: http://raw.github.com/pedrovgs/AndroidWiFiADB/master/art/screenshot1.gif
+[1]: ./art/AndroidWiFiADBIcon.png
+[2]: ./screenshot1.gif
 [3]: https://github.com/junit-team/junit
 [4]: https://github.com/mockito/mockito
