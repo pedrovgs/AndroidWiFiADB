@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
+apply plugin: 'checkstyle'
 
 group 'com.github.pedrovgs'
 version '1.0.0'
@@ -23,4 +24,13 @@ intellij {
 dependencies {
   compile 'junit:junit:4.12'
   compile 'org.mockito:mockito-all:1.10.19'
+}
+
+task checkstyle(type: Checkstyle) {
+  configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+  source 'src'
+  include '**/*.java'
+  exclude '**/gen/**'
+
+  classpath = files()
 }
