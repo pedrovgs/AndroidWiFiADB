@@ -24,10 +24,8 @@ import java.util.List;
 public class ADB {
 
   private static final String ANDROID_ENV_VAR_NAME = "ANDROID_HOME";
-  private static final String ADB_RELATIVE_PATH_UNIX =
+  private static final String ADB_RELATIVE_PATH =
       File.separator + "platform-tools" + File.separator + "adb";
-  private static final String ADB_RELATIVE_PATH_WINDOWS =
-      File.separator + "platform-tools" + File.separator + "adb.exe";
 
   private final CommandLine commandLine;
   private final ADBParser adbParser;
@@ -85,7 +83,7 @@ public class ADB {
     if (androidSdkPath == null || androidSdkPath.isEmpty()) {
       return "";
     }
-    String adbPath = isWindowsTheOS() ? ADB_RELATIVE_PATH_WINDOWS : ADB_RELATIVE_PATH_UNIX;
+    String adbPath = ADB_RELATIVE_PATH;
     String separator =
         androidSdkPath.substring(androidSdkPath.length() - 1).equals(File.separator) ? ""
             : File.separator;
@@ -94,10 +92,5 @@ public class ADB {
 
   private String getCommand(String command) {
     return getAdbPath() + " " + command;
-  }
-
-  private boolean isWindowsTheOS() {
-    String os = System.getProperty("os.name");
-    return os.toLowerCase().contains("windows");
   }
 }
