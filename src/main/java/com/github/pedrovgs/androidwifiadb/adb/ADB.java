@@ -17,15 +17,17 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
 import com.github.pedrovgs.androidwifiadb.Device;
+import com.intellij.util.EnvironmentUtil;
 import java.io.File;
-import java.util.Collection;
 import java.util.List;
-import org.jetbrains.android.sdk.AndroidSdkUtils;
 
 public class ADB {
 
-  private static final String ADB_RELATIVE_PATH =
+  private static final String ANDROID_ENV_VAR_NAME = "ANDROID_HOME";
+  private static final String ADB_RELATIVE_PATH_UNIX =
       File.separator + "platform-tools" + File.separator + "adb";
+  private static final String ADB_RELATIVE_PATH_WINDOWS =
+      File.separator + "platform-tools" + File.separator + "adb.exe";
 
   private final CommandLine commandLine;
   private final ADBParser adbParser;
@@ -36,7 +38,8 @@ public class ADB {
   }
 
   public boolean isInstalled() {
-    return AndroidSdkUtils.isAndroidSdkAvailable();
+    String versionCommand = getCommand("version");
+    return !commandLine.executeCommand(versionCommand).isEmpty();
   }
 
   public List<Device> getDevicesConnectedByUSB() {
@@ -78,15 +81,23 @@ public class ADB {
   }
 
   private String getAdbPath() {
-    String adbPath = "";
-    Collection<String> sdkList = AndroidSdkUtils.getAndroidSdkPathsFromExistingPlatforms();
-    if (!sdkList.isEmpty()) {
-      adbPath = sdkList.iterator().next() + ADB_RELATIVE_PATH;
+    String androidSdkPath = EnvironmentUtil.getValue(ANDROID_ENV_VAR_NAME);
+    if (androidSdkPath == null || androidSdkPath.isEmpty()) {
+      return "";
     }
-    return adbPath;
+    String adbPath = isWindowsTheOS() ? ADB_RELATIVE_PATH_WINDOWS : ADB_RELATIVE_PATH_UNIX;
+    String separator =
+        androidSdkPath.substring(androidSdkPath.length() - 1).equals(File.separator) ? ""
+            : File.separator;
+    return androidSdkPath + separator + adbPath;
   }
 
   private String getCommand(String command) {
     return getAdbPath() + " " + command;
+  }
+
+  private boolean isWindowsTheOS() {
+    String os = System.getProperty("os.name");
+    return os.toLowerCase().contains("windows");
   }
 }
