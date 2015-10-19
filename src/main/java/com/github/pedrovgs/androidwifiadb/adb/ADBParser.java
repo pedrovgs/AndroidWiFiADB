@@ -63,9 +63,8 @@ public class ADBParser {
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
     }
-    String[] splittedOutput = ipInfo.split("\\n");
-    int end = splittedOutput[1].indexOf(END_DEVICE_IP_INDICATOR);
-    int start = splittedOutput[1].indexOf(START_DEVICE_IP_INDICATOR) + 5;
-    return splittedOutput[1].substring(start, end);
+    int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
+    int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
+    return ipInfo.substring(start, end);
   }
 }
