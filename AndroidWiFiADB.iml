@@ -5,9 +5,12 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
     </content>
     <orderEntry type="jdk" jdkName="IntelliJ IDEA Community Edition IC-141.2735.5" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: com.jetbrains:android-common:14.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.jetbrains:android-rt:14.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.jetbrains:android:14.1.5" level="project" />
   </component>
 </module>
