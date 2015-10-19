@@ -6,8 +6,11 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="jdk" jdkName="IntelliJ IDEA Community Edition IC-141.2735.5" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.jetbrains:mockito-all-1.9.5:14.1.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.jetbrains:junit-4.11:14.1.5" level="project" />
   </component>
 </module>
