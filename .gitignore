@@ -23,3 +23,6 @@ gradle-app.setting
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
+# Avoid ignoring AndroidWiFiADB.iml file to be able to import the project into any IntelliJ IDE and run/debug the pulgin without problems
+!AndroidWiFiADB.iml
+
