@@ -17,6 +17,8 @@
 package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
+import com.intellij.openapi.project.Project;
+
 import java.util.List;
 
 public class AndroidWiFiADB {
@@ -24,7 +26,7 @@ public class AndroidWiFiADB {
   private final ADB adb;
   private final View view;
 
-  public AndroidWiFiADB(ADB adb, View view) {
+    public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
   }
@@ -53,4 +55,8 @@ public class AndroidWiFiADB {
   private boolean isADBInstalled() {
     return adb.isInstalled();
   }
+
+    public void updateProject(Project project) {
+        this.adb.updateProject(project);
+    }
 }

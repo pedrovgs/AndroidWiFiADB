@@ -17,18 +17,17 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
 import com.github.pedrovgs.androidwifiadb.Device;
-import com.intellij.util.EnvironmentUtil;
+import com.intellij.openapi.project.Project;
+import org.jetbrains.android.sdk.AndroidSdkUtils;
+
 import java.io.File;
 import java.util.List;
 
 public class ADB {
 
-  private static final String ANDROID_ENV_VAR_NAME = "ANDROID_HOME";
-  private static final String ADB_RELATIVE_PATH =
-      File.separator + "platform-tools" + File.separator + "adb";
-
   private final CommandLine commandLine;
   private final ADBParser adbParser;
+  private Project project;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
@@ -36,8 +35,7 @@ public class ADB {
   }
 
   public boolean isInstalled() {
-    String versionCommand = getCommand("version");
-    return !commandLine.executeCommand(versionCommand).isEmpty();
+    return AndroidSdkUtils.isAndroidSdkAvailable();
   }
 
   public List<Device> getDevicesConnectedByUSB() {
@@ -78,19 +76,21 @@ public class ADB {
     return connectOutput.contains("connected");
   }
 
-  private String getAdbPath() {
-    String androidSdkPath = EnvironmentUtil.getValue(ANDROID_ENV_VAR_NAME);
-    if (androidSdkPath == null || androidSdkPath.isEmpty()) {
-      return "";
+
+  private String getAdbPath(Project project) {
+    String adbPath = "";
+    File adbFile = AndroidSdkUtils.getAdb(project);
+    if (adbFile != null) {
+      adbPath = adbFile.getAbsolutePath();
     }
-    String adbPath = ADB_RELATIVE_PATH;
-    String separator =
-        androidSdkPath.substring(androidSdkPath.length() - 1).equals(File.separator) ? ""
-            : File.separator;
-    return androidSdkPath + separator + adbPath;
+    return adbPath;
   }
 
   private String getCommand(String command) {
-    return getAdbPath() + " " + command;
+    return getAdbPath(project) + " " + command;
+  }
+
+  public void updateProject(Project project) {
+    this.project = project;
   }
 }

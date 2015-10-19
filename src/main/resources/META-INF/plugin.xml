@@ -21,7 +21,7 @@
   <idea-version since-build="131"/>
 
   <extensions defaultExtensionNs="com.intellij">
-
+      <defaultProjectTypeProvider type="Android"/>
   </extensions>
 
   <application-components>
@@ -32,6 +32,8 @@
 
   </project-components>
 
+  <depends>org.jetbrains.android</depends>
+
   <actions>
 
     <action id="AndroidWiFiADB"
@@ -39,6 +41,7 @@
         text="AndroidWiFiADB"
         description="Connects your Android devices to your computer over TCP just with one click."
         icon="/icons/androidWiFiADBIcon.png"
+        project-type="Android"
         >
       <add-to-group group-id="MainToolBar" anchor="last"/>
     </action>
