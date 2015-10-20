@@ -32,8 +32,6 @@
 
   </project-components>
 
-  <depends>org.jetbrains.android</depends>
-
   <actions>
 
     <action id="AndroidWiFiADB"
