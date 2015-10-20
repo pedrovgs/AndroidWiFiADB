@@ -6,6 +6,7 @@ target/
 
 ### Java ###
 *.class
+classes/
 
 # Package Files #
 *.jar
