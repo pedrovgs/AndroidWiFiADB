@@ -26,7 +26,7 @@ public class AndroidWiFiADB {
   private final ADB adb;
   private final View view;
 
-    public AndroidWiFiADB(ADB adb, View view) {
+  public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
   }
