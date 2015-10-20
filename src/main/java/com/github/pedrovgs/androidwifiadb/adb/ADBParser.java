@@ -28,9 +28,13 @@ public class ADBParser {
   private static final String END_DEVICE_IP_INDICATOR = "/";
   private static final String START_DEVICE_IP_INDICATOR = "inet";
   private static final String ERROR_PARSING_DEVICE_IP_KEY = "Object";
+  private static final String DAEMON_INDICATOR = "daemon";
 
   public List<Device> parseGetDevicesOutput(String adbDevicesOutput) {
     List<Device> devices = new LinkedList<Device>();
+    if (adbDevicesOutput.contains(DAEMON_INDICATOR)) {
+      return devices;
+    }
     String[] splittedOutput = adbDevicesOutput.split("\\n");
     if (splittedOutput.length == 1) {
       return devices;
@@ -59,7 +63,6 @@ public class ADBParser {
   }
 
   public String parseGetDeviceIp(String ipInfo) {
-
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
     }
@@ -67,4 +70,5 @@ public class ADBParser {
     int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
     return ipInfo.substring(start, end);
   }
+
 }
