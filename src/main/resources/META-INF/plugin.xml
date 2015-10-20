@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.github.pedrovgs.androidwifiadb</id>
   <name>Android WiFi ADB</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <vendor email="pedrovicente.gomez@gmail.com" url="http://www.github.com/pedrovgs">
     Pedro Vicente Gómez Sánchez
   </vendor>
@@ -10,11 +10,14 @@
       Provides an action which allow you quickly connect your Android device over WiFi to install, run and debug your applications without a USB connected by pressing one button.
 
       Connect your device using a USB cable and press the Android WiFi ADB button. Once the device be connected over WiFi you'll see an IntelliJ/Android Studio notification. Now you can disconnect your USB cable and enjoy deploying, running and debugging your applications over WiFi.
+
+      To be able to connect your device over WiFi an environment variable with name ANDROID_HOME should be configured pointing at your Android SDK.
     ]]>
   </description>
 
   <change-notes><![CDATA[
-      1.0.0: Initial version.
+      1.0: Initial version.
+      1.1: Fixes for Windows and Linux.
     ]]>
   </change-notes>
 
