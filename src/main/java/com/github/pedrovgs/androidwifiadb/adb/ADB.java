@@ -77,7 +77,7 @@ public class ADB {
   }
 
 
-  private String getAdbPath(Project project) {
+  private String getAdbPath() {
     String adbPath = "";
     File adbFile = AndroidSdkUtils.getAdb(project);
     if (adbFile != null) {
@@ -87,7 +87,7 @@ public class ADB {
   }
 
   private String getCommand(String command) {
-    return getAdbPath(project) + " " + command;
+    return getAdbPath() + " " + command;
   }
 
   public void updateProject(Project project) {

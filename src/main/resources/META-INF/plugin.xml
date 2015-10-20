@@ -21,7 +21,7 @@
   <idea-version since-build="131"/>
 
   <extensions defaultExtensionNs="com.intellij">
-      <defaultProjectTypeProvider type="Android"/>
+  <defaultProjectTypeProvider type="Android"/>
   </extensions>
 
   <application-components>

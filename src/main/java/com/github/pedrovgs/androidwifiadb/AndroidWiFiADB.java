@@ -56,7 +56,7 @@ public class AndroidWiFiADB {
     return adb.isInstalled();
   }
 
-    public void updateProject(Project project) {
-        this.adb.updateProject(project);
-    }
+  public void updateProject(Project project) {
+    this.adb.updateProject(project);
+  }
 }
