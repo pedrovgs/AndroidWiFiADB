@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.github.pedrovgs.androidwifiadb</id>
   <name>Android WiFi ADB</name>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <vendor email="pedrovicente.gomez@gmail.com" url="http://www.github.com/pedrovgs">
     Pedro Vicente Gómez Sánchez
   </vendor>
