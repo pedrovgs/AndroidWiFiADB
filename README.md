@@ -6,7 +6,7 @@ Android WiFi ADB - IntelliJ/Android Studio Plugin [![Build Status](https://travi
 
 **Android WiFI ADB plugin adds a button ![Android WiFi ADB Button][5] to your IntelliJ/Android Studio Toolbar** to connect your device to your computer over WiFi.  
 
-*This plugin only works when you are working with an Android Project configured on your IntelliJ/Android Studio.*
+*To use this plugin the project opened in your IntelliJ/Android Studio has to be an Android project configured with the Android SDK.*
 
 Screenshots
 -----------
