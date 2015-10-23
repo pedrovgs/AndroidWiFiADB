@@ -3,6 +3,7 @@ out/
 .idea/
 target/
 *.iml
+local.properties
 
 ### Java ###
 *.class

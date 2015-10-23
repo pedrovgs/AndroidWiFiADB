@@ -61,23 +61,24 @@ public class AndroidDevices implements ToolWindowFactory, View {
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
                 androidWifiADB.connectDevices();
-                ApplicationManager.getApplication().invokeLater(new Runnable() {
-                    @Override public void run() {
-                        fillDevicesTable(androidWifiADB.getDevices());
-                    }
-                });
+                fillDevicesTable(androidWifiADB.getDevices());
             }
         });
     }
 
-    private void fillDevicesTable(List<Device> devices) {
-        AndroidDevicesTableModel model = new AndroidDevicesTableModel();
-        for(Device device : devices) {
-            model.add(device);
-        }
-        tableDevices.setModel(model);
-        ConnectDisconnectRenderer renderer = new ConnectDisconnectRenderer();
-        tableDevices.getColumnModel().getColumn(2).setCellRenderer(renderer);
+    private void fillDevicesTable(final List<Device> devices) {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                AndroidDevicesTableModel model = new AndroidDevicesTableModel();
+                for(Device device : devices) {
+                    model.add(device);
+                }
+                tableDevices.setModel(model);
+                ConnectDisconnectRenderer renderer = new ConnectDisconnectRenderer();
+                tableDevices.getColumnModel().getColumn(2).setCellRenderer(renderer);
+            }
+        });
     }
 
     @Override public void showNoConnectedDevicesNotification() {
