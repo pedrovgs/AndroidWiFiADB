@@ -16,10 +16,13 @@
 
 package com.github.pedrovgs.androidwifiadb.adb;
 
-import com.github.pedrovgs.androidwifiadb.Device;
+import org.jetbrains.android.sdk.AndroidSdkUtils;
+
 import com.intellij.openapi.project.Project;
 import org.jetbrains.android.sdk.AndroidSdkUtils;
 
+import com.github.pedrovgs.androidwifiadb.model.Device;
+import com.intellij.util.EnvironmentUtil;
 import java.io.File;
 import java.util.List;
 

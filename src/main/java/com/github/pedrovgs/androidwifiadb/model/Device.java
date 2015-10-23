@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb;
+package com.github.pedrovgs.androidwifiadb.model;
 
 public class Device {
 

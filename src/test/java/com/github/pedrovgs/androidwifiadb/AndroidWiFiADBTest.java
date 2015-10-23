@@ -17,6 +17,8 @@
 package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
+import com.github.pedrovgs.androidwifiadb.model.Device;
+
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;

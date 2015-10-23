@@ -28,6 +28,11 @@
 
     <defaultProjectTypeProvider type="Android"/>
 
+      <toolWindow id="Android Devices Window"
+              icon="/icons/androidWiFiADBIcon.png"
+              anchor="right"
+              factoryClass="com.github.pedrovgs.androidwifiadb.window.AndroidDevices">
+      </toolWindow>
   </extensions>
 
   <application-components>

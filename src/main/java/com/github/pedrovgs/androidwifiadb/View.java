@@ -16,6 +16,8 @@
 
 package com.github.pedrovgs.androidwifiadb;
 
+import com.github.pedrovgs.androidwifiadb.model.Device;
+
 public interface View {
 
   void showNoConnectedDevicesNotification();
