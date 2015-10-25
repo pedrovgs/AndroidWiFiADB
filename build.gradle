@@ -19,6 +19,7 @@ intellij {
   version '14.1.5'
   pluginName 'AndroidWiFiADB'
   plugins 'android'
+  updateSinceUntilBuild false
 }
 
 dependencies {
