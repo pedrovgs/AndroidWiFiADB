@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'checkstyle'
 
 group 'com.github.pedrovgs'
-version '1.2-SNAPSHOT'
+version '1.2'
 
 sourceCompatibility = 1.6
 

@@ -73,7 +73,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
 
   @Override public void showADBNotInstalledNotification() {
     showNotification(ANDROID_WIFI_ADB_TITLE,
-        "Android SDK not found. Please, review your project configuration and be sure that you are working on an "
+        "Android SDK not found. Please, review your project configuration and ensure that you are working on an "
                 + "Android project.", NotificationType.ERROR);
   }
 
