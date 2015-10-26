@@ -23,11 +23,11 @@ public class CardLayoutDevices {
     private static final String CARD_DEVICES = "Card with JTable devices";
     private static final String CARD_NO_DEVICES = "Card with no devices info";
 
-    Container parentContainer;
-    JPanel cards;
-    JPanel panelNoDevices;
-    JPanel panelDevices;
-    JTable tableDevices;
+    private Container parentContainer;
+    private JPanel cards;
+    private JPanel panelNoDevices;
+    private JPanel panelDevices;
+    private JTable tableDevices;
     private List<Device> devices;
 
     public CardLayoutDevices(Container parentContainer) {

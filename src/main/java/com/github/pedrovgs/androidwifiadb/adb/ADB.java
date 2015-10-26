@@ -60,6 +60,7 @@ public class ADB {
     if (deviceIp.isEmpty()) {
       return false;
     } else {
+      device.setIp(deviceIp);
       return connectDevice(deviceIp);
     }
   }

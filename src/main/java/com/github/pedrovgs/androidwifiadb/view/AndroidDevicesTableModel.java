@@ -61,7 +61,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         Object value = null;
         switch (columnIndex) {
             case 0:
-                value = obj.getName();
+                value = obj.toString();
                 break;
             case 1:
                 value = obj.isConnected() ? "connected" : "disconnected";

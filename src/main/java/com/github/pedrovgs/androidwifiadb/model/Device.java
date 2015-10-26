@@ -20,6 +20,7 @@ public class Device {
 
   private final String name;
   private final String id;
+  private String ip = "";
   private boolean connected;
 
   public Device(String name, String id) {
@@ -35,11 +36,28 @@ public class Device {
     return id;
   }
 
+  public String getIp() {
+    return ip;
+  }
+
+  public void setIp(String ip) {
+    this.ip = ip;
+  }
+
   public boolean isConnected() {
     return connected;
   }
 
   public void setConnected(boolean connected) {
     this.connected = connected;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder(getName());
+    if(ip.length() > 0) {
+      builder.append(" (").append(ip).append(")");
+    }
+    return builder.toString();
   }
 }
