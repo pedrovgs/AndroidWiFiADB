@@ -16,13 +16,11 @@
 
 package com.github.pedrovgs.androidwifiadb.adb;
 
-import org.jetbrains.android.sdk.AndroidSdkUtils;
-
-import com.intellij.openapi.project.Project;
-import org.jetbrains.android.sdk.AndroidSdkUtils;
-
 import com.github.pedrovgs.androidwifiadb.model.Device;
-import com.intellij.util.EnvironmentUtil;
+import com.intellij.openapi.project.Project;
+
+import org.jetbrains.android.sdk.AndroidSdkUtils;
+
 import java.io.File;
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class ADB {
   }
 
   private boolean connectDeviceByIp(Device device) {
-    String deviceIp = getDeviceIp(device);
+    String deviceIp = device.getIp().length() > 0 ? device.getIp() : getDeviceIp(device);
     if (deviceIp.isEmpty()) {
       return false;
     } else {
@@ -65,7 +63,7 @@ public class ADB {
     }
   }
 
-  private String getDeviceIp(Device device) {
+  public String getDeviceIp(Device device) {
     String getDeviceIpCommand =
         getCommand("-s " + device.getId() + " shell ip -f inet addr show wlan0");
     String ipInfoOutput = commandLine.executeCommand(getDeviceIpCommand);

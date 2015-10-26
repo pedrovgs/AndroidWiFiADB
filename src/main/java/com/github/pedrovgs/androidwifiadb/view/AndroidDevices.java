@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 /**
  * Created by vgaidarji on 10/23/15.
  */
-public class AndroidDevices implements ToolWindowFactory, View {
+public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
 
     private int INTERVAL_REFRESH_DEVICES = 1000;
     private static final String ANDROID_WIFI_ADB_TITLE = "Android WiFi ADB";
@@ -39,7 +39,7 @@ public class AndroidDevices implements ToolWindowFactory, View {
         ADBParser adbParser = new ADBParser();
         ADB adb = new ADB(commandLine, adbParser);
         this.androidWifiADB = new AndroidWiFiADB(adb, this);
-        cardLayoutDevices = new CardLayoutDevices(toolWindowContent);
+        cardLayoutDevices = new CardLayoutDevices(toolWindowContent, this);
     }
 
     @Override
@@ -72,13 +72,7 @@ public class AndroidDevices implements ToolWindowFactory, View {
 
                     boolean refreshRequired = androidWifiADB.refreshDevicesList();
                     if (refreshRequired) {
-                        ApplicationManager.getApplication().invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                cardLayoutDevices.setDevices(androidWifiADB.getDevices());
-                                cardLayoutDevices.updateUi();
-                            }
-                        });
+                        updateUi();
                     }
                 }
             }
@@ -131,5 +125,29 @@ public class AndroidDevices implements ToolWindowFactory, View {
                 Notifications.Bus.notify(notification);
             }
         });
+    }
+
+    @Override
+    public void connectDevice(final Device device) {
+        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            public void run() {
+                androidWifiADB.connectDevice(device);
+                updateUi();
+            }
+        });
+    }
+
+    private void updateUi() {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                cardLayoutDevices.setDevices(androidWifiADB.getDevices());
+                cardLayoutDevices.updateUi();
+            }
+        });
+    }
+
+    @Override
+    public void disconnectDevice(Device device) {
     }
 }

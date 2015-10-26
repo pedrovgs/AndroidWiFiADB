@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.github.pedrovgs.androidwifiadb.view.View;
 import com.github.pedrovgs.androidwifiadb.model.Device;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AndroidWiFiADB {
@@ -45,13 +46,7 @@ public class AndroidWiFiADB {
     }
 
     devices = adb.connectDevices(devices);
-    for (Device device : devices) {
-      if (device.isConnected()) {
-        view.showConnectedDeviceNotification(device);
-      } else {
-        view.showErrorConnectingDeviceNotification(device);
-      }
-    }
+    showConnectionResultNotification(devices);
   }
 
   /**
@@ -72,6 +67,7 @@ public class AndroidWiFiADB {
     for(Device connectedDevice : connected) {
       boolean deviceExists = checkDeviceExistance(connectedDevice);
       if(!deviceExists) {
+        connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
         devices.add(connectedDevice);
       }else {
         updateDeviceInfo(connectedDevice);
@@ -111,5 +107,30 @@ public class AndroidWiFiADB {
 
   public void updateProject(Project project) {
     this.adb.updateProject(project);
+  }
+
+  public void connectDevice(Device device) {
+    if (!isADBInstalled()) {
+      view.showADBNotInstalledNotification();
+      return;
+    }
+
+    List<Device> connectedDevices = new ArrayList<>();
+    connectedDevices.add(device);
+    connectedDevices = adb.connectDevices(connectedDevices);
+    for(Device connected : connectedDevices) {
+      updateDeviceInfo(connected);
+    }
+    showConnectionResultNotification(connectedDevices);
+  }
+
+  private void showConnectionResultNotification(List<Device> connectedDevices) {
+    for (Device d : connectedDevices) {
+      if (d.isConnected()) {
+        view.showConnectedDeviceNotification(d);
+      } else {
+        view.showErrorConnectingDeviceNotification(d);
+      }
+    }
   }
 }

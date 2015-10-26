@@ -5,7 +5,7 @@ import com.github.pedrovgs.androidwifiadb.model.Device;
 /**
  * Created by vgaidarji on 10/26/15.
  */
-public interface DeviceStateListener {
-    void onDeviceConnected(Device device);
-    void onDeviceDisconnected(Device device);
+public interface DeviceAction {
+    void connectDevice(Device device);
+    void disconnectDevice(Device device);
 }

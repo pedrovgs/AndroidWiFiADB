@@ -6,11 +6,10 @@ import com.intellij.ui.table.JBTable;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -19,7 +18,7 @@ import javax.swing.SwingConstants;
 /**
  * Created by vgaidarji on 10/26/15.
  */
-public class CardLayoutDevices implements DeviceStateListener{
+public class CardLayoutDevices implements ActionButtonListener {
 
     private static final String CARD_DEVICES = "Card with JTable devices";
     private static final String CARD_NO_DEVICES = "Card with no devices info";
@@ -30,8 +29,10 @@ public class CardLayoutDevices implements DeviceStateListener{
     private JPanel panelDevices;
     private JTable tableDevices;
     private List<Device> devices;
+    private DeviceAction deviceAction;
 
-    public CardLayoutDevices(Container parentContainer) {
+    public CardLayoutDevices(Container parentContainer, DeviceAction action) {
+        this.deviceAction = action;
         this.parentContainer = parentContainer;
         this.devices = new ArrayList<>();
     }
@@ -90,14 +91,23 @@ public class CardLayoutDevices implements DeviceStateListener{
             model.add(device);
         }
         tableDevices = new JBTable(model);
-        ConnectDisconnectRenderer renderer = new ConnectDisconnectRenderer();
-        tableDevices.getColumnModel().getColumn(2).setCellRenderer(renderer);
+        configureTableAppearance();
 
-        panelDevices = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelDevices.add(tableDevices, gbc);
+        panelDevices = new JPanel(new BorderLayout());
+        panelDevices.add(tableDevices.getTableHeader(), BorderLayout.NORTH);
+        panelDevices.add(tableDevices, BorderLayout.CENTER);
+    }
+
+    private void configureTableAppearance() {
+        tableDevices.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tableDevices.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tableDevices.getColumnModel().getColumn(1).setMinWidth(80);
+        tableDevices.getColumnModel().getColumn(1).setMaxWidth(80);
+        tableDevices.getColumnModel().getColumn(2).setMinWidth(215);
+        tableDevices.getColumnModel().getColumn(2).setMaxWidth(215);
+        tableDevices.getColumnModel().getColumn(2).setCellRenderer(new ConnectDisconnectRenderer());
+        tableDevices.getColumnModel().getColumn(2).setCellEditor(
+                new ConnectDisconnectEditor(new JCheckBox(), this));
     }
 
     private void updateDevicesTable() {
@@ -111,12 +121,23 @@ public class CardLayoutDevices implements DeviceStateListener{
     }
 
     @Override
-    public void onDeviceConnected(Device device) {
-
+    public void onConnectClick(int row) {
+        Device device = getDeviceAt(row);
+        if(device != null) {
+            deviceAction.connectDevice(device);
+        }
     }
 
     @Override
-    public void onDeviceDisconnected(Device device) {
+    public void onDisconnectClick(int row) {
+        Device device = getDeviceAt(row);
+        if(device != null) {
+            deviceAction.connectDevice(device);
+        }
+    }
 
+    private Device getDeviceAt(int row) {
+        AndroidDevicesTableModel model = (AndroidDevicesTableModel) tableDevices.getModel();
+        return model.get(row);
     }
 }

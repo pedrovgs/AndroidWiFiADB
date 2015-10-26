@@ -8,6 +8,10 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class AndroidDevicesTableModel extends AbstractTableModel {
+    private static final int COLUMN_DEVICE = 0;
+    private static final int COLUMN_STATE = 1;
+    private static final int COLUMN_ACTION = 2;
+
     private List<Device> devices;
 
     public AndroidDevicesTableModel() {
@@ -18,13 +22,13 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         String value = null;
         switch (column) {
-            case 0:
+            case COLUMN_DEVICE:
                 value = "Device";
                 break;
-            case 1:
+            case COLUMN_STATE:
                 value = "State";
                 break;
-            case 2:
+            case COLUMN_ACTION:
                 value = "Action";
                 break;
         }
@@ -35,10 +39,10 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         Class value = Object.class;
         switch (columnIndex) {
-            case 0:
+            case COLUMN_DEVICE:
                 value = String.class;
                 break;
-            case 1:
+            case COLUMN_STATE:
                 value = String.class;
                 break;
         }
@@ -60,13 +64,13 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         Device obj = devices.get(rowIndex);
         Object value = null;
         switch (columnIndex) {
-            case 0:
+            case COLUMN_DEVICE:
                 value = obj.toString();
                 break;
-            case 1:
+            case COLUMN_STATE:
                 value = obj.isConnected() ? "connected" : "disconnected";
                 break;
-            case 2:
+            case COLUMN_ACTION:
                 break;
         }
         return value;
@@ -74,11 +78,16 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        if (columnIndex == 2) {
+        if (columnIndex == COLUMN_ACTION) {
             System.out.println(aValue);
             Device device = devices.get(rowIndex);
             fireTableCellUpdated(rowIndex, columnIndex);
         }
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == COLUMN_ACTION;
     }
 
     /**
@@ -102,4 +111,12 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         devices.remove(value);
         fireTableRowsInserted(startIndex, startIndex);
     }
+
+    public Device get(int index) {
+        if(index >= 0 && index < devices.size()) {
+            return devices.get(index);
+        }
+        return null;
+    }
+
 }
