@@ -81,6 +81,15 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Clear data source.
+     */
+    public void clear() {
+        if(devices != null) {
+            devices.clear();
+        }
+    }
+
     public void add(Device value) {
         int startIndex = getRowCount();
         devices.add(value);

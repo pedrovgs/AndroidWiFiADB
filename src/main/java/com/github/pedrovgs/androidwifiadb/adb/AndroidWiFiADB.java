@@ -54,6 +54,53 @@ public class AndroidWiFiADB {
     }
   }
 
+  /**
+   * Find connected devices through USB.
+   * If there's a new device - we add it to devices list.
+   * Call <code>getDevices()</code> in order to get updated devices list.
+   * <br>We should always update devices list,
+   * because their names might change.
+   * Unathorized and authorized states produce different device names.
+   * @return true - refresh required, false - otherwise.
+   */
+  public boolean refreshDevicesList() {
+    if (!isADBInstalled()) {
+      view.showADBNotInstalledNotification();
+      return false;
+    }
+    List<Device> connected = adb.getDevicesConnectedByUSB();
+    for(Device connectedDevice : connected) {
+      boolean deviceExists = checkDeviceExistance(connectedDevice);
+      if(!deviceExists) {
+        devices.add(connectedDevice);
+      }else {
+        updateDeviceInfo(connectedDevice);
+      }
+    }
+    return true;
+  }
+
+  private void updateDeviceInfo(Device connectedDevice) {
+    for(int i = 0, size = devices.size(); i < size; i++) {
+      Device device = devices.get(i);
+      if(connectedDevice.getId().equals(device.getId())) {
+        devices.remove(i);
+        device.setName(connectedDevice.getName());
+        devices.add(i, device);
+      }
+    }
+  }
+
+  private boolean checkDeviceExistance(Device connectedDevice) {
+    boolean deviceExists = false;
+    for(Device device : devices) {
+      if(connectedDevice.getId().equals(device.getId())) {
+        deviceExists = true;
+      }
+    }
+    return deviceExists;
+  }
+
   public List<Device> getDevices() {
     return devices;
   }

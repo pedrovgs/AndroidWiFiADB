@@ -18,7 +18,7 @@ package com.github.pedrovgs.androidwifiadb.model;
 
 public class Device {
 
-  private final String name;
+  private String name;
   private final String id;
   private String ip = "";
   private boolean connected;
@@ -42,6 +42,10 @@ public class Device {
 
   public void setIp(String ip) {
     this.ip = ip;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public boolean isConnected() {

@@ -25,12 +25,12 @@ import javax.swing.JPanel;
  */
 public class AndroidDevices implements ToolWindowFactory, View {
 
+    private int INTERVAL_REFRESH_DEVICES = 1000;
     private static final String ANDROID_WIFI_ADB_TITLE = "Android WiFi ADB";
     private static final NotificationGroup NOTIFICATION_GROUP =
             NotificationGroup.balloonGroup(ANDROID_WIFI_ADB_TITLE);
 
     private final AndroidWiFiADB androidWifiADB;
-
     private JPanel toolWindowContent;
     private final CardLayoutDevices cardLayoutDevices;
 
@@ -52,6 +52,35 @@ public class AndroidDevices implements ToolWindowFactory, View {
             public void run() {
                 androidWifiADB.connectDevices();
                 fillDevicesTable(androidWifiADB.getDevices());
+                monitorDevices();
+            }
+        });
+    }
+
+    /**
+     * Monitors connected devices state and triggers UI updates.
+     */
+    private void monitorDevices() {
+        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(INTERVAL_REFRESH_DEVICES);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    boolean refreshRequired = androidWifiADB.refreshDevicesList();
+                    if (refreshRequired) {
+                        ApplicationManager.getApplication().invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                cardLayoutDevices.setDevices(androidWifiADB.getDevices());
+                                cardLayoutDevices.updateUi();
+                            }
+                        });
+                    }
+                }
             }
         });
     }
@@ -66,24 +95,28 @@ public class AndroidDevices implements ToolWindowFactory, View {
         });
     }
 
-    @Override public void showNoConnectedDevicesNotification() {
+    @Override
+    public void showNoConnectedDevicesNotification() {
         showNotification(ANDROID_WIFI_ADB_TITLE,
                 "There are no devices connected. Review your USB connection and try again. ",
                 NotificationType.INFORMATION);
     }
 
-    @Override public void showConnectedDeviceNotification(Device device) {
+    @Override
+    public void showConnectedDeviceNotification(Device device) {
         showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' connected.",
                 NotificationType.INFORMATION);
     }
 
-    @Override public void showErrorConnectingDeviceNotification(Device device) {
+    @Override
+    public void showErrorConnectingDeviceNotification(Device device) {
         showNotification(ANDROID_WIFI_ADB_TITLE,
                 "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
                 NotificationType.INFORMATION);
     }
 
-    @Override public void showADBNotInstalledNotification() {
+    @Override
+    public void showADBNotInstalledNotification() {
         showNotification(ANDROID_WIFI_ADB_TITLE,
                 "'adb' command not found. Review your Android SDK installation.", NotificationType.ERROR);
     }
@@ -91,7 +124,8 @@ public class AndroidDevices implements ToolWindowFactory, View {
     private void showNotification(final String title, final String message,
                                   final NotificationType type) {
         ApplicationManager.getApplication().invokeLater(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 Notification notification =
                         NOTIFICATION_GROUP.createNotification(title, message, type, null);
                 Notifications.Bus.notify(notification);

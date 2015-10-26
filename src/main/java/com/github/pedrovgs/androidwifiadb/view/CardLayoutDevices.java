@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -18,7 +19,7 @@ import javax.swing.SwingConstants;
 /**
  * Created by vgaidarji on 10/26/15.
  */
-public class CardLayoutDevices {
+public class CardLayoutDevices implements DeviceStateListener{
 
     private static final String CARD_DEVICES = "Card with JTable devices";
     private static final String CARD_NO_DEVICES = "Card with no devices info";
@@ -32,6 +33,7 @@ public class CardLayoutDevices {
 
     public CardLayoutDevices(Container parentContainer) {
         this.parentContainer = parentContainer;
+        this.devices = new ArrayList<>();
     }
 
     public void setDevices(List<Device> devices) {
@@ -48,15 +50,23 @@ public class CardLayoutDevices {
         cards.add(panelDevices, CARD_DEVICES);
         cards.add(panelNoDevices, CARD_NO_DEVICES);
         parentContainer.add(cards, BorderLayout.PAGE_START);
-        updateUi();
+        setupUi();
+    }
+
+    private void setupUi() {
+        if(devices.size() > 0) {
+            showCard(CARD_DEVICES);
+        }else {
+            showCard(CARD_NO_DEVICES);
+        }
     }
 
     /**
-     * Shows appropriate card (depends on connected devices).
+     * Shows appropriate card, depending on connected devices.
      */
-    private void updateUi() {
+    public void updateUi() {
         if(devices.size() > 0) {
-            showCard(CARD_DEVICES);
+            updateDevicesTable();
         }else {
             showCard(CARD_NO_DEVICES);
         }
@@ -88,5 +98,25 @@ public class CardLayoutDevices {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panelDevices.add(tableDevices, gbc);
+    }
+
+    private void updateDevicesTable() {
+        AndroidDevicesTableModel model = (AndroidDevicesTableModel) tableDevices.getModel();
+        model.clear();
+        for(Device device : devices) {
+            model.add(device);
+        }
+        tableDevices.setModel(model);
+        model.fireTableDataChanged();
+    }
+
+    @Override
+    public void onDeviceConnected(Device device) {
+
+    }
+
+    @Override
+    public void onDeviceDisconnected(Device device) {
+
     }
 }
