@@ -31,7 +31,7 @@
       <toolWindow id="Android Devices Window"
               icon="/icons/androidWiFiADBIcon.png"
               anchor="right"
-              factoryClass="com.github.pedrovgs.androidwifiadb.window.AndroidDevices">
+              factoryClass="com.github.pedrovgs.androidwifiadb.view.AndroidDevices">
       </toolWindow>
   </extensions>
 

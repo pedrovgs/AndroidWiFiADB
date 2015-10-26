@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb;
+package com.github.pedrovgs.androidwifiadb.adb;
 
-import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.intellij.openapi.project.Project;
+import com.github.pedrovgs.androidwifiadb.view.View;
 import com.github.pedrovgs.androidwifiadb.model.Device;
 
 import java.util.List;
