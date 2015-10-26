@@ -93,9 +93,4 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         devices.remove(value);
         fireTableRowsInserted(startIndex, startIndex);
     }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 2;
-    }
 }

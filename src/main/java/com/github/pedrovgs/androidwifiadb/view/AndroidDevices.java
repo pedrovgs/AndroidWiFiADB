@@ -19,7 +19,6 @@ import com.intellij.ui.content.ContentFactory;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JTable;
 
 /**
  * Created by vgaidarji on 10/23/15.
@@ -33,13 +32,14 @@ public class AndroidDevices implements ToolWindowFactory, View {
     private final AndroidWiFiADB androidWifiADB;
 
     private JPanel toolWindowContent;
-    private JTable tableDevices;
+    private final CardLayoutDevices cardLayoutDevices;
 
     public AndroidDevices() {
         CommandLine commandLine = new CommandLine();
         ADBParser adbParser = new ADBParser();
         ADB adb = new ADB(commandLine, adbParser);
         this.androidWifiADB = new AndroidWiFiADB(adb, this);
+        cardLayoutDevices = new CardLayoutDevices(toolWindowContent);
     }
 
     @Override
@@ -60,13 +60,8 @@ public class AndroidDevices implements ToolWindowFactory, View {
         ApplicationManager.getApplication().invokeLater(new Runnable() {
             @Override
             public void run() {
-                AndroidDevicesTableModel model = new AndroidDevicesTableModel();
-                for(Device device : devices) {
-                    model.add(device);
-                }
-                tableDevices.setModel(model);
-                ConnectDisconnectRenderer renderer = new ConnectDisconnectRenderer();
-                tableDevices.getColumnModel().getColumn(2).setCellRenderer(renderer);
+                cardLayoutDevices.setDevices(devices);
+                cardLayoutDevices.createAndShowGUI();
             }
         });
     }
