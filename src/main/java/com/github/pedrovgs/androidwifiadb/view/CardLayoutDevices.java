@@ -67,6 +67,7 @@ public class CardLayoutDevices implements ActionButtonListener {
      */
     public void updateUi() {
         if(devices.size() > 0) {
+            showCard(CARD_DEVICES);
             updateDevicesTable();
         }else {
             showCard(CARD_NO_DEVICES);
