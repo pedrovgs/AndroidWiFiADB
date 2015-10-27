@@ -102,8 +102,8 @@ public class CardLayoutDevices implements ActionButtonListener {
     private void configureTableAppearance() {
         tableDevices.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tableDevices.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tableDevices.getColumnModel().getColumn(1).setMinWidth(80);
-        tableDevices.getColumnModel().getColumn(1).setMaxWidth(80);
+        tableDevices.getColumnModel().getColumn(1).setMinWidth(85);
+        tableDevices.getColumnModel().getColumn(1).setMaxWidth(85);
         tableDevices.getColumnModel().getColumn(2).setMinWidth(215);
         tableDevices.getColumnModel().getColumn(2).setMaxWidth(215);
         tableDevices.getColumnModel().getColumn(2).setCellRenderer(new ConnectDisconnectRenderer());
