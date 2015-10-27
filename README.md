@@ -12,11 +12,13 @@ Screenshots
 -----------
 
 ![Android WiFi ADB Usage][2]
+![Android Devices Window][7]
 
 Usage
 -----
 
 Connect your device to your computer using a USB cable. Then press the button and disconnect your USB once the plugin connects your device over WiFi. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection.  
+=======
 
 Installation
 ------------
@@ -78,3 +80,4 @@ License
 [4]: https://github.com/mockito/mockito
 [5]: ./art/sampleButton.png
 [6]: https://plugins.jetbrains.com/plugin/7983
+[7]: ./art/android_devices_window.png
