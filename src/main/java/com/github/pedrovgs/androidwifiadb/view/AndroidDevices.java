@@ -42,6 +42,8 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
 
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
+        this.androidWifiADB.updateProject(project);
+
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(toolWindowContent, "", false);
         toolWindow.getContentManager().addContent(content);
