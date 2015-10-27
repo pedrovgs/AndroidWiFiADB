@@ -32,7 +32,7 @@ public class AndroidWiFiADB {
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
-    this.devices = new ArrayList<>();
+    this.devices = new ArrayList<Device>();
   }
 
   public void connectDevices() {
@@ -115,7 +115,7 @@ public class AndroidWiFiADB {
       return;
     }
 
-    List<Device> connectedDevices = new ArrayList<>();
+    List<Device> connectedDevices = new ArrayList<Device>();
     connectedDevices.add(device);
     connectedDevices = adb.connectDevices(connectedDevices);
     for(Device connected : connectedDevices) {
@@ -130,7 +130,7 @@ public class AndroidWiFiADB {
       return;
     }
 
-    List<Device> disconnected = new ArrayList<>();
+    List<Device> disconnected = new ArrayList<Device>();
     disconnected.add(device);
     disconnected = adb.disconnectDevices(disconnected);
     for(Device d : disconnected) {

@@ -15,7 +15,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     private List<Device> devices;
 
     public AndroidDevicesTableModel() {
-        devices = new ArrayList<>();
+        devices = new ArrayList<Device>();
     }
 
     @Override

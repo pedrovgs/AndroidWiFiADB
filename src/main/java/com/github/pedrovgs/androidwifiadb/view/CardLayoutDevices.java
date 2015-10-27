@@ -34,7 +34,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     public CardLayoutDevices(Container parentContainer, DeviceAction action) {
         this.deviceAction = action;
         this.parentContainer = parentContainer;
-        this.devices = new ArrayList<>();
+        this.devices = new ArrayList<Device>();
     }
 
     public void setDevices(List<Device> devices) {
