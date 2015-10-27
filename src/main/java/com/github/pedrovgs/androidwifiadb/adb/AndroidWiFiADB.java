@@ -32,6 +32,7 @@ public class AndroidWiFiADB {
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
+    this.devices = new ArrayList<>();
   }
 
   public void connectDevices() {
@@ -60,7 +61,6 @@ public class AndroidWiFiADB {
    */
   public boolean refreshDevicesList() {
     if (!isADBInstalled()) {
-      view.showADBNotInstalledNotification();
       return false;
     }
     List<Device> connected = adb.getDevicesConnectedByUSB();

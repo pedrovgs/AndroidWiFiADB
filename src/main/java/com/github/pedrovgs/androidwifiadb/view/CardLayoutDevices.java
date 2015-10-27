@@ -55,7 +55,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     }
 
     private void setupUi() {
-        if(devices.size() > 0) {
+        if(devices != null && devices.size() > 0) {
             showCard(CARD_DEVICES);
         }else {
             showCard(CARD_NO_DEVICES);
@@ -66,7 +66,7 @@ public class CardLayoutDevices implements ActionButtonListener {
      * Shows appropriate card, depending on connected devices.
      */
     public void updateUi() {
-        if(devices.size() > 0) {
+        if(devices != null && devices.size() > 0) {
             showCard(CARD_DEVICES);
             updateDevicesTable();
         }else {

@@ -29,6 +29,7 @@ public class ADB {
   private final CommandLine commandLine;
   private final ADBParser adbParser;
   private Project project;
+  private boolean isTCPEnabled = false;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
@@ -96,9 +97,15 @@ public class ADB {
     return devices;
   }
 
+  /**
+   * Restarts adb in tcpip mode. Uses 5555 port.
+   */
   private void enableTCPCommand() {
-    String enableTCPCommand = getCommand("tcpip 5555");
-    commandLine.executeCommand(enableTCPCommand);
+    if(!isTCPEnabled) {
+      String enableTCPCommand = getCommand("tcpip 5555");
+      commandLine.executeCommand(enableTCPCommand);
+      isTCPEnabled = true;
+    }
   }
 
 

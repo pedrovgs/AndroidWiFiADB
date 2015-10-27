@@ -16,8 +16,6 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 
-import java.util.List;
-
 import javax.swing.JPanel;
 
 /**
@@ -50,9 +48,17 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
 
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
-                androidWifiADB.connectDevices();
-                fillDevicesTable(androidWifiADB.getDevices());
+                setupUI();
                 monitorDevices();
+            }
+        });
+    }
+
+    private void setupUI() {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                cardLayoutDevices.createAndShowGUI();
             }
         });
     }
@@ -64,27 +70,17 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
                 while (true) {
+                    boolean refreshRequired = androidWifiADB.refreshDevicesList();
+                    if (refreshRequired) {
+                        updateUi();
+                    }
+
                     try {
                         Thread.sleep(INTERVAL_REFRESH_DEVICES);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-                    boolean refreshRequired = androidWifiADB.refreshDevicesList();
-                    if (refreshRequired) {
-                        updateUi();
-                    }
                 }
-            }
-        });
-    }
-
-    private void fillDevicesTable(final List<Device> devices) {
-        ApplicationManager.getApplication().invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                cardLayoutDevices.setDevices(devices);
-                cardLayoutDevices.createAndShowGUI();
             }
         });
     }
