@@ -71,11 +71,34 @@ public class ADB {
   }
 
   private boolean connectDevice(String deviceIp) {
+    enableTCPCommand();
+    String connectDeviceCommand = getCommand("connect " + deviceIp);
+    return commandLine.executeCommand(connectDeviceCommand).contains("connected");
+  }
+
+  /**
+   * Disconnect connected device by IP.
+   * If device is disconnected with success, we should get an empty command result.
+   * @param deviceIp
+   * @return
+   */
+  private boolean disconnectDevice(String deviceIp) {
+    enableTCPCommand();
+    String connectDeviceCommand = getCommand("disconnect " + deviceIp);
+    return commandLine.executeCommand(connectDeviceCommand).isEmpty();
+  }
+
+  public List<Device> disconnectDevices(List<Device> devices) {
+    for (Device device : devices) {
+      boolean disconnected = disconnectDevice(device.getIp());
+      device.setConnected(disconnected);
+    }
+    return devices;
+  }
+
+  private void enableTCPCommand() {
     String enableTCPCommand = getCommand("tcpip 5555");
     commandLine.executeCommand(enableTCPCommand);
-    String connectDeviceCommand = getCommand("connect " + deviceIp);
-    String connectOutput = commandLine.executeCommand(connectDeviceCommand);
-    return connectOutput.contains("connected");
   }
 
 

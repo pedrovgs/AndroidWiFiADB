@@ -133,7 +133,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     public void onDisconnectClick(int row) {
         Device device = getDeviceAt(row);
         if(device != null) {
-            deviceAction.connectDevice(device);
+            deviceAction.disconnectDevice(device);
         }
     }
 

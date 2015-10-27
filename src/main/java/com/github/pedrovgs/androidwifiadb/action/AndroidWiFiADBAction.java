@@ -65,13 +65,26 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         NotificationType.INFORMATION);
   }
 
-  @Override public void showErrorConnectingDeviceNotification(Device device) {
+    @Override
+    public void showDisconnectedDeviceNotification(Device device) {
+        showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' disconnected.",
+                NotificationType.INFORMATION);
+    }
+
+    @Override public void showErrorConnectingDeviceNotification(Device device) {
     showNotification(ANDROID_WIFI_ADB_TITLE,
         "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
         NotificationType.INFORMATION);
   }
 
-  @Override public void showADBNotInstalledNotification() {
+    @Override
+    public void showErrorDisconnectingDeviceNotification(Device device) {
+        showNotification(ANDROID_WIFI_ADB_TITLE,
+                "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
+                NotificationType.INFORMATION);
+    }
+
+    @Override public void showADBNotInstalledNotification() {
     showNotification(ANDROID_WIFI_ADB_TITLE,
         "Android SDK not found. Please, review your project configuration and ensure that you are working on an "
                 + "Android project.", NotificationType.ERROR);

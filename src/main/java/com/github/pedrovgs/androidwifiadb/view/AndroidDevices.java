@@ -103,9 +103,22 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
     }
 
     @Override
+    public void showDisconnectedDeviceNotification(Device device) {
+        showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' disconnected.",
+                NotificationType.INFORMATION);
+    }
+
+    @Override
     public void showErrorConnectingDeviceNotification(Device device) {
         showNotification(ANDROID_WIFI_ADB_TITLE,
                 "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
+                NotificationType.INFORMATION);
+    }
+
+    @Override
+    public void showErrorDisconnectingDeviceNotification(Device device) {
+        showNotification(ANDROID_WIFI_ADB_TITLE,
+                "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
                 NotificationType.INFORMATION);
     }
 
@@ -137,6 +150,16 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
         });
     }
 
+    @Override
+    public void disconnectDevice(final Device device) {
+        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            public void run() {
+                androidWifiADB.disconnectDevice(device);
+                updateUi();
+            }
+        });
+    }
+
     private void updateUi() {
         ApplicationManager.getApplication().invokeLater(new Runnable() {
             @Override
@@ -145,9 +168,5 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
                 cardLayoutDevices.updateUi();
             }
         });
-    }
-
-    @Override
-    public void disconnectDevice(Device device) {
     }
 }

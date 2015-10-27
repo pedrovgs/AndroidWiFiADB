@@ -76,12 +76,12 @@ public class AndroidWiFiADB {
     return true;
   }
 
-  private void updateDeviceInfo(Device connectedDevice) {
+  private void updateDeviceInfo(Device updatedDevice) {
     for(int i = 0, size = devices.size(); i < size; i++) {
       Device device = devices.get(i);
-      if(connectedDevice.getId().equals(device.getId())) {
+      if(updatedDevice.getId().equals(device.getId())) {
         devices.remove(i);
-        device.setName(connectedDevice.getName());
+        device.setName(updatedDevice.getName());
         devices.add(i, device);
       }
     }
@@ -124,12 +124,37 @@ public class AndroidWiFiADB {
     showConnectionResultNotification(connectedDevices);
   }
 
-  private void showConnectionResultNotification(List<Device> connectedDevices) {
-    for (Device d : connectedDevices) {
+  public void disconnectDevice(Device device) {
+    if (!isADBInstalled()) {
+      view.showADBNotInstalledNotification();
+      return;
+    }
+
+    List<Device> disconnected = new ArrayList<>();
+    disconnected.add(device);
+    disconnected = adb.disconnectDevices(disconnected);
+    for(Device d : disconnected) {
+      updateDeviceInfo(d);
+    }
+    showDisconnectionResultNotification(disconnected);
+  }
+
+  private void showConnectionResultNotification(List<Device> devices) {
+    for (Device d : devices) {
       if (d.isConnected()) {
         view.showConnectedDeviceNotification(d);
       } else {
         view.showErrorConnectingDeviceNotification(d);
+      }
+    }
+  }
+
+  private void showDisconnectionResultNotification(List<Device> devices) {
+    for (Device d : devices) {
+      if (!d.isConnected()) {
+        view.showDisconnectedDeviceNotification(d);
+      } else {
+        view.showErrorDisconnectingDeviceNotification(d);
       }
     }
   }
