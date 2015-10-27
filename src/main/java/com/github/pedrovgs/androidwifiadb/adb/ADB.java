@@ -101,7 +101,7 @@ public class ADB {
    * Restarts adb in tcpip mode. Uses 5555 port.
    */
   private void enableTCPCommand() {
-    if(!isTCPEnabled) {
+    if (!isTCPEnabled) {
       String enableTCPCommand = getCommand("tcpip 5555");
       commandLine.executeCommand(enableTCPCommand);
       isTCPEnabled = true;

@@ -64,12 +64,12 @@ public class AndroidWiFiADB {
       return false;
     }
     List<Device> connected = adb.getDevicesConnectedByUSB();
-    for(Device connectedDevice : connected) {
+    for (Device connectedDevice : connected) {
       boolean deviceExists = checkDeviceExistance(connectedDevice);
-      if(!deviceExists) {
+      if (!deviceExists) {
         connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
         devices.add(connectedDevice);
-      }else {
+      } else {
         updateDeviceInfo(connectedDevice);
       }
     }
@@ -77,9 +77,9 @@ public class AndroidWiFiADB {
   }
 
   private void updateDeviceInfo(Device updatedDevice) {
-    for(int i = 0, size = devices.size(); i < size; i++) {
+    for (int i = 0, size = devices.size(); i < size; i++) {
       Device device = devices.get(i);
-      if(updatedDevice.getId().equals(device.getId())) {
+      if (updatedDevice.getId().equals(device.getId())) {
         devices.remove(i);
         device.setName(updatedDevice.getName());
         devices.add(i, device);
@@ -89,8 +89,8 @@ public class AndroidWiFiADB {
 
   private boolean checkDeviceExistance(Device connectedDevice) {
     boolean deviceExists = false;
-    for(Device device : devices) {
-      if(connectedDevice.getId().equals(device.getId())) {
+    for (Device device : devices) {
+      if (connectedDevice.getId().equals(device.getId())) {
         deviceExists = true;
       }
     }
@@ -118,7 +118,7 @@ public class AndroidWiFiADB {
     List<Device> connectedDevices = new ArrayList<Device>();
     connectedDevices.add(device);
     connectedDevices = adb.connectDevices(connectedDevices);
-    for(Device connected : connectedDevices) {
+    for (Device connected : connectedDevices) {
       updateDeviceInfo(connected);
     }
     showConnectionResultNotification(connectedDevices);
@@ -133,7 +133,7 @@ public class AndroidWiFiADB {
     List<Device> disconnected = new ArrayList<Device>();
     disconnected.add(device);
     disconnected = adb.disconnectDevices(disconnected);
-    for(Device d : disconnected) {
+    for (Device d : disconnected) {
       updateDeviceInfo(d);
     }
     showDisconnectionResultNotification(disconnected);

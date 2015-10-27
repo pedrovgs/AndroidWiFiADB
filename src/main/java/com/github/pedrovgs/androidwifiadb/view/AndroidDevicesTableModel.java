@@ -20,7 +20,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        String value = null;
+        String value;
         switch (column) {
             case COLUMN_DEVICE:
                 value = "Device";
@@ -31,6 +31,8 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
             case COLUMN_ACTION:
                 value = "Action";
                 break;
+            default:
+                return null;
         }
         return value;
     }
@@ -45,6 +47,8 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
             case COLUMN_STATE:
                 value = String.class;
                 break;
+            default:
+                return value;
         }
         return value;
     }
@@ -72,6 +76,8 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
                 break;
             case COLUMN_ACTION:
                 break;
+            default:
+                return null;
         }
         return value;
     }
@@ -79,8 +85,6 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if (columnIndex == COLUMN_ACTION) {
-            System.out.println(aValue);
-            Device device = devices.get(rowIndex);
             fireTableCellUpdated(rowIndex, columnIndex);
         }
     }
@@ -94,7 +98,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
      * Clear data source.
      */
     public void clear() {
-        if(devices != null) {
+        if (devices != null) {
             devices.clear();
         }
     }
@@ -113,7 +117,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     }
 
     public Device get(int index) {
-        if(index >= 0 && index < devices.size()) {
+        if (index >= 0 && index < devices.size()) {
             return devices.get(index);
         }
         return null;

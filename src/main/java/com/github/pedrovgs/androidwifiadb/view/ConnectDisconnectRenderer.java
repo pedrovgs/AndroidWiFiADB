@@ -14,7 +14,9 @@ public class ConnectDisconnectRenderer extends JPanel implements TableCellRender
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(JTable table, Object value,
+                                                   boolean isSelected, boolean hasFocus,
+                                                   int row, int column) {
         if (isSelected) {
             connectDisconnectPane.setBackground(table.getSelectionBackground());
         } else {

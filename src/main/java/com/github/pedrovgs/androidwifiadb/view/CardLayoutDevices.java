@@ -55,9 +55,9 @@ public class CardLayoutDevices implements ActionButtonListener {
     }
 
     private void setupUi() {
-        if(devices != null && devices.size() > 0) {
+        if (devices != null && devices.size() > 0) {
             showCard(CARD_DEVICES);
-        }else {
+        } else {
             showCard(CARD_NO_DEVICES);
         }
     }
@@ -66,16 +66,16 @@ public class CardLayoutDevices implements ActionButtonListener {
      * Shows appropriate card, depending on connected devices.
      */
     public void updateUi() {
-        if(devices != null && devices.size() > 0) {
+        if (devices != null && devices.size() > 0) {
             showCard(CARD_DEVICES);
             updateDevicesTable();
-        }else {
+        } else {
             showCard(CARD_NO_DEVICES);
         }
     }
 
     private void showCard(String cardName) {
-        CardLayout cardLayout = (CardLayout)(cards.getLayout());
+        CardLayout cardLayout = (CardLayout) cards.getLayout();
         cardLayout.show(cards, cardName);
     }
 
@@ -88,7 +88,7 @@ public class CardLayoutDevices implements ActionButtonListener {
 
     private void createTableDevices() {
         AndroidDevicesTableModel model = new AndroidDevicesTableModel();
-        for(Device device : devices) {
+        for (Device device : devices) {
             model.add(device);
         }
         tableDevices = new JBTable(model);
@@ -114,7 +114,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     private void updateDevicesTable() {
         AndroidDevicesTableModel model = (AndroidDevicesTableModel) tableDevices.getModel();
         model.clear();
-        for(Device device : devices) {
+        for (Device device : devices) {
             model.add(device);
         }
         tableDevices.setModel(model);
@@ -124,7 +124,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     @Override
     public void onConnectClick(int row) {
         Device device = getDeviceAt(row);
-        if(device != null) {
+        if (device != null) {
             deviceAction.connectDevice(device);
         }
     }
@@ -132,7 +132,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     @Override
     public void onDisconnectClick(int row) {
         Device device = getDeviceAt(row);
-        if(device != null) {
+        if (device != null) {
             deviceAction.disconnectDevice(device);
         }
     }

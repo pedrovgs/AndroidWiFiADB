@@ -44,9 +44,9 @@ public class ConnectDisconnectEditor extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         if (clicked && listener != null) {
-            if(ACTION_CONNECT.equals(clickedButtonAction)) {
+            if (ACTION_CONNECT.equals(clickedButtonAction)) {
                 listener.onConnectClick(row);
-            }else if(ACTION_DISCONNECT.equals(clickedButtonAction)) {
+            } else if (ACTION_DISCONNECT.equals(clickedButtonAction)) {
                 listener.onDisconnectClick(row);
             }
         }
