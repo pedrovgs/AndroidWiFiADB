@@ -55,7 +55,7 @@ public class ADB {
   }
 
   private boolean connectDeviceByIp(Device device) {
-    String deviceIp = device.getIp().length() > 0 ? device.getIp() : getDeviceIp(device);
+    String deviceIp = !device.getIp().isEmpty() ? device.getIp() : getDeviceIp(device);
     if (deviceIp.isEmpty()) {
       return false;
     } else {
