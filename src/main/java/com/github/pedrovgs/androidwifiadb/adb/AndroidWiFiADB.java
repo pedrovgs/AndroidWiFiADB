@@ -96,13 +96,13 @@ public class AndroidWiFiADB {
       return;
     }
 
-    List<Device> disconnected = new ArrayList<Device>();
-    disconnected.add(device);
-    disconnected = adb.disconnectDevices(disconnected);
-    for (Device d : disconnected) {
+    List<Device> disconnectedDevices = new ArrayList<Device>();
+    disconnectedDevices.add(device);
+    disconnectedDevices = adb.disconnectDevices(disconnectedDevices);
+    for (Device d : disconnectedDevices) {
       updateDeviceConnectionState(d);
     }
-    showDisconnectionResultNotification(disconnected);
+    showDisconnectionResultNotification(disconnectedDevices);
   }
 
   private void updateDeviceConnectionState(Device updatedDevice) {
@@ -131,21 +131,21 @@ public class AndroidWiFiADB {
   }
 
   private void showConnectionResultNotification(List<Device> devices) {
-    for (Device d : devices) {
-      if (d.isConnected()) {
-        view.showConnectedDeviceNotification(d);
+    for (Device device : devices) {
+      if (device.isConnected()) {
+        view.showConnectedDeviceNotification(device);
       } else {
-        view.showErrorConnectingDeviceNotification(d);
+        view.showErrorConnectingDeviceNotification(device);
       }
     }
   }
 
   private void showDisconnectionResultNotification(List<Device> devices) {
-    for (Device d : devices) {
-      if (!d.isConnected()) {
-        view.showDisconnectedDeviceNotification(d);
+    for (Device device : devices) {
+      if (!device.isConnected()) {
+        view.showDisconnectedDeviceNotification(device);
       } else {
-        view.showErrorDisconnectingDeviceNotification(d);
+        view.showErrorDisconnectingDeviceNotification(device);
       }
     }
   }
