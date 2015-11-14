@@ -37,8 +37,7 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
     cardLayoutDevices = new CardLayoutDevices(toolWindowContent, this);
   }
 
-  @Override
-  public void createToolWindowContent(Project project, ToolWindow toolWindow) {
+  @Override public void createToolWindowContent(Project project, ToolWindow toolWindow) {
     this.androidWifiADB.updateProject(project);
 
     ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
@@ -53,11 +52,62 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
     });
   }
 
+  @Override public void showNoConnectedDevicesNotification() {
+    showNotification(ANDROID_WIFI_ADB_TITLE,
+        "There are no devices connected. Review your USB connection and try again. ",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showConnectedDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' connected.",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showDisconnectedDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' disconnected.",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showErrorConnectingDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE,
+        "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showErrorDisconnectingDeviceNotification(Device device) {
+    showNotification(ANDROID_WIFI_ADB_TITLE,
+        "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
+        NotificationType.INFORMATION);
+  }
+
+  @Override public void showADBNotInstalledNotification() {
+    showNotification(ANDROID_WIFI_ADB_TITLE,
+        "'adb' command not found. Review your Android SDK installation.", NotificationType.ERROR);
+  }
+
   private void setupUI() {
     ApplicationManager.getApplication().invokeLater(new Runnable() {
       @Override
       public void run() {
         cardLayoutDevices.createAndShowGUI();
+      }
+    });
+  }
+
+  @Override public void connectDevice(final Device device) {
+    ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+      public void run() {
+        androidWifiADB.connectDevice(device);
+        updateUi();
+      }
+    });
+  }
+
+  @Override public void disconnectDevice(final Device device) {
+    ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+      public void run() {
+        androidWifiADB.disconnectDevice(device);
+        updateUi();
       }
     });
   }
@@ -81,45 +131,6 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
     });
   }
 
-  @Override
-  public void showNoConnectedDevicesNotification() {
-    showNotification(ANDROID_WIFI_ADB_TITLE,
-        "There are no devices connected. Review your USB connection and try again. ",
-        NotificationType.INFORMATION);
-  }
-
-  @Override
-  public void showConnectedDeviceNotification(Device device) {
-    showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' connected.",
-        NotificationType.INFORMATION);
-  }
-
-  @Override
-  public void showDisconnectedDeviceNotification(Device device) {
-    showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' disconnected.",
-        NotificationType.INFORMATION);
-  }
-
-  @Override
-  public void showErrorConnectingDeviceNotification(Device device) {
-    showNotification(ANDROID_WIFI_ADB_TITLE,
-        "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
-        NotificationType.INFORMATION);
-  }
-
-  @Override
-  public void showErrorDisconnectingDeviceNotification(Device device) {
-    showNotification(ANDROID_WIFI_ADB_TITLE,
-        "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
-        NotificationType.INFORMATION);
-  }
-
-  @Override
-  public void showADBNotInstalledNotification() {
-    showNotification(ANDROID_WIFI_ADB_TITLE,
-        "'adb' command not found. Review your Android SDK installation.", NotificationType.ERROR);
-  }
-
   private void showNotification(final String title, final String message,
       final NotificationType type) {
     ApplicationManager.getApplication().invokeLater(new Runnable() {
@@ -128,26 +139,6 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
         Notification notification =
             NOTIFICATION_GROUP.createNotification(title, message, type, null);
         Notifications.Bus.notify(notification);
-      }
-    });
-  }
-
-  @Override
-  public void connectDevice(final Device device) {
-    ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-      public void run() {
-        androidWifiADB.connectDevice(device);
-        updateUi();
-      }
-    });
-  }
-
-  @Override
-  public void disconnectDevice(final Device device) {
-    ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-      public void run() {
-        androidWifiADB.disconnectDevice(device);
-        updateUi();
       }
     });
   }

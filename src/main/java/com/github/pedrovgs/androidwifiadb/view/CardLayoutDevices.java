@@ -48,18 +48,32 @@ public class CardLayoutDevices implements ActionButtonListener {
     setupUi();
   }
 
-  private void setupUi() {
+  public void updateUi() {
     if (devices != null && devices.size() > 0) {
       showCard(CARD_DEVICES);
+      updateDevicesTable();
     } else {
       showCard(CARD_NO_DEVICES);
     }
   }
 
-  public void updateUi() {
+  @Override public void onConnectClick(int row) {
+    Device device = getDeviceAt(row);
+    if (device != null) {
+      deviceAction.connectDevice(device);
+    }
+  }
+
+  @Override public void onDisconnectClick(int row) {
+    Device device = getDeviceAt(row);
+    if (device != null) {
+      deviceAction.disconnectDevice(device);
+    }
+  }
+
+  private void setupUi() {
     if (devices != null && devices.size() > 0) {
       showCard(CARD_DEVICES);
-      updateDevicesTable();
     } else {
       showCard(CARD_NO_DEVICES);
     }
@@ -110,22 +124,6 @@ public class CardLayoutDevices implements ActionButtonListener {
     }
     tableDevices.setModel(model);
     model.fireTableDataChanged();
-  }
-
-  @Override
-  public void onConnectClick(int row) {
-    Device device = getDeviceAt(row);
-    if (device != null) {
-      deviceAction.connectDevice(device);
-    }
-  }
-
-  @Override
-  public void onDisconnectClick(int row) {
-    Device device = getDeviceAt(row);
-    if (device != null) {
-      deviceAction.disconnectDevice(device);
-    }
   }
 
   private Device getDeviceAt(int row) {

@@ -67,33 +67,8 @@ public class AndroidWiFiADB {
     return true;
   }
 
-  private void updateDeviceInfo(Device updatedDevice) {
-    for (int i = 0, size = devices.size(); i < size; i++) {
-      Device device = devices.get(i);
-      if (updatedDevice.getId().equals(device.getId())) {
-        devices.remove(i);
-        device.setName(updatedDevice.getName());
-        devices.add(i, device);
-      }
-    }
-  }
-
-  private boolean checkDeviceExistance(Device connectedDevice) {
-    boolean deviceExists = false;
-    for (Device device : devices) {
-      if (connectedDevice.getId().equals(device.getId())) {
-        deviceExists = true;
-      }
-    }
-    return deviceExists;
-  }
-
   public List<Device> getDevices() {
     return devices;
-  }
-
-  private boolean isADBInstalled() {
-    return adb.isInstalled();
   }
 
   public void updateProject(Project project) {
@@ -128,6 +103,31 @@ public class AndroidWiFiADB {
       updateDeviceInfo(d);
     }
     showDisconnectionResultNotification(disconnected);
+  }
+
+  private void updateDeviceInfo(Device updatedDevice) {
+    for (int i = 0, size = devices.size(); i < size; i++) {
+      Device device = devices.get(i);
+      if (updatedDevice.getId().equals(device.getId())) {
+        devices.remove(i);
+        device.setName(updatedDevice.getName());
+        devices.add(i, device);
+      }
+    }
+  }
+
+  private boolean checkDeviceExistance(Device connectedDevice) {
+    boolean deviceExists = false;
+    for (Device device : devices) {
+      if (connectedDevice.getId().equals(device.getId())) {
+        deviceExists = true;
+      }
+    }
+    return deviceExists;
+  }
+
+  private boolean isADBInstalled() {
+    return adb.isInstalled();
   }
 
   private void showConnectionResultNotification(List<Device> devices) {

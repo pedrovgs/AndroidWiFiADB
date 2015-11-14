@@ -65,8 +65,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         NotificationType.INFORMATION);
   }
 
-  @Override
-  public void showDisconnectedDeviceNotification(Device device) {
+  @Override public void showDisconnectedDeviceNotification(Device device) {
     showNotification(ANDROID_WIFI_ADB_TITLE, "Device '" + device.getName() + "' disconnected.",
         NotificationType.INFORMATION);
   }
@@ -77,8 +76,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
         NotificationType.INFORMATION);
   }
 
-  @Override
-  public void showErrorDisconnectingDeviceNotification(Device device) {
+  @Override public void showErrorDisconnectingDeviceNotification(Device device) {
     showNotification(ANDROID_WIFI_ADB_TITLE,
         "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
         NotificationType.INFORMATION);

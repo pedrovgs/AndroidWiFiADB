@@ -54,6 +54,25 @@ public class ADB {
     return devices;
   }
 
+  public String getDeviceIp(Device device) {
+    String getDeviceIpCommand =
+        getCommand("-s " + device.getId() + " shell ip -f inet addr show wlan0");
+    String ipInfoOutput = commandLine.executeCommand(getDeviceIpCommand);
+    return adbParser.parseGetDeviceIp(ipInfoOutput);
+  }
+
+  public List<Device> disconnectDevices(List<Device> devices) {
+    for (Device device : devices) {
+      boolean disconnected = disconnectDevice(device.getIp());
+      device.setConnected(disconnected);
+    }
+    return devices;
+  }
+
+  public void updateProject(Project project) {
+    this.project = project;
+  }
+
   private boolean connectDeviceByIp(Device device) {
     String deviceIp = !device.getIp().isEmpty() ? device.getIp() : getDeviceIp(device);
     if (deviceIp.isEmpty()) {
@@ -62,13 +81,6 @@ public class ADB {
       device.setIp(deviceIp);
       return connectDevice(deviceIp);
     }
-  }
-
-  public String getDeviceIp(Device device) {
-    String getDeviceIpCommand =
-        getCommand("-s " + device.getId() + " shell ip -f inet addr show wlan0");
-    String ipInfoOutput = commandLine.executeCommand(getDeviceIpCommand);
-    return adbParser.parseGetDeviceIp(ipInfoOutput);
   }
 
   private boolean connectDevice(String deviceIp) {
@@ -81,14 +93,6 @@ public class ADB {
     enableTCPCommand();
     String connectDeviceCommand = getCommand("disconnect " + deviceIp);
     return commandLine.executeCommand(connectDeviceCommand).isEmpty();
-  }
-
-  public List<Device> disconnectDevices(List<Device> devices) {
-    for (Device device : devices) {
-      boolean disconnected = disconnectDevice(device.getIp());
-      device.setConnected(disconnected);
-    }
-    return devices;
   }
 
   private void enableTCPCommand() {
@@ -110,9 +114,5 @@ public class ADB {
 
   private String getCommand(String command) {
     return getAdbPath() + " " + command;
-  }
-
-  public void updateProject(Project project) {
-    this.project = project;
   }
 }

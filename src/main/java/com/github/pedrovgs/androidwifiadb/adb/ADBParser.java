@@ -53,15 +53,6 @@ public class ADBParser {
     return devices;
   }
 
-  private String parseDeviceName(String line) {
-    int start = line.indexOf(MODEL_INDICATOR) + MODEL_INDICATOR.length();
-    int end = line.indexOf(DEVICE_INDICATOR) - 1;
-    if (end < 0) {
-      end = line.length();
-    }
-    return line.substring(start, end);
-  }
-
   public String parseGetDeviceIp(String ipInfo) {
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
@@ -69,5 +60,14 @@ public class ADBParser {
     int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
     int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
     return ipInfo.substring(start, end);
+  }
+
+  private String parseDeviceName(String line) {
+    int start = line.indexOf(MODEL_INDICATOR) + MODEL_INDICATOR.length();
+    int end = line.indexOf(DEVICE_INDICATOR) - 1;
+    if (end < 0) {
+      end = line.length();
+    }
+    return line.substring(start, end);
   }
 }
