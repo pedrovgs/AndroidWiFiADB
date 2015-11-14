@@ -70,5 +70,4 @@ public class ADBParser {
     int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
     return ipInfo.substring(start, end);
   }
-
 }

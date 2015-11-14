@@ -78,10 +78,8 @@ public class ADB {
   }
 
   /**
-   * Disconnect connected device by IP.
-   * If device is disconnected with success, we should get an empty command result.
-   * @param deviceIp
-   * @return
+   * Disconnect connected device by IP. If device is disconnected with success, we should get an
+   * empty command result.
    */
   private boolean disconnectDevice(String deviceIp) {
     enableTCPCommand();
@@ -107,7 +105,6 @@ public class ADB {
       isTCPEnabled = true;
     }
   }
-
 
   private String getAdbPath() {
     String adbPath = "";

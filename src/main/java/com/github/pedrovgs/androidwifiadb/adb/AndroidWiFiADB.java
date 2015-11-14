@@ -51,12 +51,11 @@ public class AndroidWiFiADB {
   }
 
   /**
-   * Find connected devices through USB.
-   * If there's a new device - we add it to devices list.
-   * Call <code>getDevices()</code> in order to get updated devices list.
-   * <br>We should always update devices list,
-   * because their names might change.
-   * Unathorized and authorized states produce different device names.
+   * Find connected devices through USB. If there's a new device - we add it to devices list. Call
+   * <code>getDevices()</code> in order to get updated devices list. <br>We should always update
+   * devices list, because their names might change. Unathorized and authorized states produce
+   * different device names.
+   *
    * @return true - refresh required, false - otherwise.
    */
   public boolean refreshDevicesList() {
