@@ -77,10 +77,6 @@ public class ADB {
     return commandLine.executeCommand(connectDeviceCommand).contains("connected");
   }
 
-  /**
-   * Disconnect connected device by IP. If device is disconnected with success, we should get an
-   * empty command result.
-   */
   private boolean disconnectDevice(String deviceIp) {
     enableTCPCommand();
     String connectDeviceCommand = getCommand("disconnect " + deviceIp);
@@ -95,9 +91,6 @@ public class ADB {
     return devices;
   }
 
-  /**
-   * Restarts adb in tcpip mode. Uses 5555 port.
-   */
   private void enableTCPCommand() {
     if (!isTCPEnabled) {
       String enableTCPCommand = getCommand("tcpip 5555");

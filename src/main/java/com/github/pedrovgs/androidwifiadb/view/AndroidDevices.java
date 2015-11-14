@@ -18,9 +18,6 @@ import com.intellij.ui.content.ContentFactory;
 
 import javax.swing.JPanel;
 
-/**
- * Created by vgaidarji on 10/23/15.
- */
 public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
 
   private int INTERVAL_REFRESH_DEVICES = 1000;
@@ -65,9 +62,6 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
     });
   }
 
-  /**
-   * Monitors connected devices state and triggers UI updates.
-   */
   private void monitorDevices() {
     ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
       public void run() {

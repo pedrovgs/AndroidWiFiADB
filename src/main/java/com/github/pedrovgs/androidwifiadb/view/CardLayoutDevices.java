@@ -15,9 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-/**
- * Created by vgaidarji on 10/26/15.
- */
 public class CardLayoutDevices implements ActionButtonListener {
 
   private static final String CARD_DEVICES = "Card with JTable devices";
@@ -41,9 +38,6 @@ public class CardLayoutDevices implements ActionButtonListener {
     this.devices = devices;
   }
 
-  /**
-   * Create and show Devices UI in parentContainer.
-   */
   public void createAndShowGUI() {
     cards = new JPanel(new CardLayout());
     createNoDevicesPanel();
@@ -62,9 +56,6 @@ public class CardLayoutDevices implements ActionButtonListener {
     }
   }
 
-  /**
-   * Shows appropriate card, depending on connected devices.
-   */
   public void updateUi() {
     if (devices != null && devices.size() > 0) {
       showCard(CARD_DEVICES);

@@ -94,9 +94,6 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     return columnIndex == COLUMN_ACTION;
   }
 
-  /**
-   * Clear data source.
-   */
   public void clear() {
     if (devices != null) {
       devices.clear();
@@ -111,7 +108,6 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
 
   public void remove(Device value) {
     int startIndex = devices.indexOf(value);
-    System.out.println("startIndex = " + startIndex);
     devices.remove(value);
     fireTableRowsInserted(startIndex, startIndex);
   }
