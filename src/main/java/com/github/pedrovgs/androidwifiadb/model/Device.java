@@ -59,7 +59,7 @@ public class Device {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder(getName());
-    if (ip.length() > 0) {
+    if (!ip.isEmpty()) {
       builder.append(" (").append(ip).append(")");
     }
     return builder.toString();
