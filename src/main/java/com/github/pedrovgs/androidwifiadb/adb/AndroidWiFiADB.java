@@ -99,8 +99,8 @@ public class AndroidWiFiADB {
     List<Device> disconnectedDevices = new ArrayList<Device>();
     disconnectedDevices.add(device);
     disconnectedDevices = adb.disconnectDevices(disconnectedDevices);
-    for (Device d : disconnectedDevices) {
-      updateDeviceConnectionState(d);
+    for (Device disconnected : disconnectedDevices) {
+      updateDeviceConnectionState(disconnected);
     }
     showDisconnectionResultNotification(disconnectedDevices);
   }

@@ -27,12 +27,9 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
   private static final int COLUMN_DEVICE = 0;
   private static final int COLUMN_STATE = 1;
   private static final int COLUMN_ACTION = 2;
+  private static final int COLUMN_COUNT = 3;
 
-  private List<Device> devices;
-
-  public AndroidDevicesTableModel() {
-    devices = new ArrayList<Device>();
-  }
+  private final List<Device> devices = new ArrayList<Device>();
 
   @Override
   public String getColumnName(int column) {
@@ -76,7 +73,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
 
   @Override
   public int getColumnCount() {
-    return 3;
+    return COLUMN_COUNT;
   }
 
   @Override

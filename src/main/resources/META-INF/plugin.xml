@@ -28,10 +28,10 @@
 
     <defaultProjectTypeProvider type="Android"/>
 
-      <toolWindow id="Android Devices Window"
+      <toolWindow id="Android WiFi ADB"
               icon="/icons/androidWiFiADBIcon.png"
               anchor="right"
-              factoryClass="com.github.pedrovgs.androidwifiadb.view.AndroidDevices">
+              factoryClass="com.github.pedrovgs.androidwifiadb.view.AndroidWiFiADBAction">
       </toolWindow>
   </extensions>
 

@@ -34,9 +34,9 @@ import com.intellij.ui.content.ContentFactory;
 
 import javax.swing.JPanel;
 
-public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
+public class AndroidWiFiADBAction implements ToolWindowFactory, View, DeviceAction {
 
-  private int INTERVAL_REFRESH_DEVICES = 1000;
+  private static final int INTERVAL_REFRESH_DEVICES = 1000;
   private static final String ANDROID_WIFI_ADB_TITLE = "Android WiFi ADB";
   private static final NotificationGroup NOTIFICATION_GROUP =
       NotificationGroup.balloonGroup(ANDROID_WIFI_ADB_TITLE);
@@ -45,7 +45,7 @@ public class AndroidDevices implements ToolWindowFactory, View, DeviceAction {
   private JPanel toolWindowContent;
   private final CardLayoutDevices cardLayoutDevices;
 
-  public AndroidDevices() {
+  public AndroidWiFiADBAction() {
     CommandLine commandLine = new CommandLine();
     ADBParser adbParser = new ADBParser();
     ADB adb = new ADB(commandLine, adbParser);

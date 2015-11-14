@@ -23,11 +23,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 public class ConnectDisconnectRenderer extends JPanel implements TableCellRenderer {
-  private ConnectDisconnectPanel connectDisconnectPane;
-
-  public ConnectDisconnectRenderer() {
-    connectDisconnectPane = new ConnectDisconnectPanel();
-  }
+  private final ConnectDisconnectPanel connectDisconnectPane = new ConnectDisconnectPanel();
 
   @Override
   public Component getTableCellRendererComponent(JTable table, Object value,
