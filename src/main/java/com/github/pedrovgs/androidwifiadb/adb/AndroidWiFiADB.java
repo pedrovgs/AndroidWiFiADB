@@ -61,7 +61,7 @@ public class AndroidWiFiADB {
         connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
         devices.add(connectedDevice);
       } else {
-        updateDeviceInfo(connectedDevice);
+        updateDeviceConnectionState(connectedDevice);
       }
     }
     return true;
@@ -85,7 +85,7 @@ public class AndroidWiFiADB {
     connectedDevices.add(device);
     connectedDevices = adb.connectDevices(connectedDevices);
     for (Device connected : connectedDevices) {
-      updateDeviceInfo(connected);
+      updateDeviceConnectionState(connected);
     }
     showConnectionResultNotification(connectedDevices);
   }
@@ -100,12 +100,12 @@ public class AndroidWiFiADB {
     disconnected.add(device);
     disconnected = adb.disconnectDevices(disconnected);
     for (Device d : disconnected) {
-      updateDeviceInfo(d);
+      updateDeviceConnectionState(d);
     }
     showDisconnectionResultNotification(disconnected);
   }
 
-  private void updateDeviceInfo(Device updatedDevice) {
+  private void updateDeviceConnectionState(Device updatedDevice) {
     for (int i = 0, size = devices.size(); i < size; i++) {
       Device device = devices.get(i);
       if (updatedDevice.getId().equals(device.getId())) {
