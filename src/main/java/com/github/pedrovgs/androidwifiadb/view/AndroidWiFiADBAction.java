@@ -56,21 +56,20 @@ public class AndroidWiFiADBAction implements ToolWindowFactory, View, DeviceActi
   @Override public void createToolWindowContent(Project project, ToolWindow toolWindow) {
     this.androidWifiADB.updateProject(project);
 
+    createToolWindowContent(toolWindow);
+    setupUI();
+    monitorDevices();
+  }
+
+  private void createToolWindowContent(ToolWindow toolWindow) {
     ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
     Content content = contentFactory.createContent(toolWindowContent, "", false);
     toolWindow.getContentManager().addContent(content);
-
-    ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-      public void run() {
-        setupUI();
-        monitorDevices();
-      }
-    });
   }
 
   @Override public void showNoConnectedDevicesNotification() {
     showNotification(ANDROID_WIFI_ADB_TITLE,
-        "There are no devices connected. Review your USB connection and try again. ",
+        "There are no devices connected. Review your USB connection and try again.",
         NotificationType.INFORMATION);
   }
 

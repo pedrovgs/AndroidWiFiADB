@@ -56,7 +56,7 @@ public class AndroidWiFiADBAction extends AnAction implements View {
 
   @Override public void showNoConnectedDevicesNotification() {
     showNotification(ANDROID_WIFI_ADB_TITLE,
-        "There are no devices connected. Review your USB connection and try again. ",
+        "There are no devices connected. Review your USB connection and try again.",
         NotificationType.INFORMATION);
   }
 
