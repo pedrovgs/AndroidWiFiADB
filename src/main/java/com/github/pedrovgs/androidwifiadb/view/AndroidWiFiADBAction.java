@@ -32,6 +32,8 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JPanel;
 
 public class AndroidWiFiADBAction implements ToolWindowFactory, View, DeviceAction {
@@ -130,18 +132,14 @@ public class AndroidWiFiADBAction implements ToolWindowFactory, View, DeviceActi
   private void monitorDevices() {
     ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
       public void run() {
-        while (true) {
-          boolean refreshRequired = androidWifiADB.refreshDevicesList();
-          if (refreshRequired) {
-            updateUi();
+        new Timer().schedule(new TimerTask() {
+          @Override public void run() {
+            boolean refreshRequired = androidWifiADB.refreshDevicesList();
+            if (refreshRequired) {
+              updateUi();
+            }
           }
-
-          try {
-            Thread.sleep(INTERVAL_REFRESH_DEVICES);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
+        }, 0, INTERVAL_REFRESH_DEVICES);
       }
     });
   }
