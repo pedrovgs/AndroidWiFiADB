@@ -18,9 +18,9 @@ package com.github.pedrovgs.androidwifiadb.view;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
-import com.github.pedrovgs.androidwifiadb.adb.AndroidWiFiADB;
+import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
-import com.github.pedrovgs.androidwifiadb.model.Device;
+import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationGroup;
 import com.intellij.notification.NotificationType;

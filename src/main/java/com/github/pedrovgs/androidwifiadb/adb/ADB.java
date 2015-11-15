@@ -16,7 +16,7 @@
 
 package com.github.pedrovgs.androidwifiadb.adb;
 
-import com.github.pedrovgs.androidwifiadb.model.Device;
+import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.openapi.project.Project;
 
 import org.jetbrains.android.sdk.AndroidSdkUtils;

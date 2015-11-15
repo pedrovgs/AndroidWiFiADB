@@ -16,7 +16,7 @@
 
 package com.github.pedrovgs.androidwifiadb.view;
 
-import com.github.pedrovgs.androidwifiadb.model.Device;
+import com.github.pedrovgs.androidwifiadb.Device;
 
 import java.util.ArrayList;
 import java.util.List;
