@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.github.pedrovgs.androidwifiadb.view.AndroidWiFiADBAction">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.github.pedrovgs.androidwifiadb.view.AndroidWiFiADBWindow">
   <grid id="27dc6" binding="toolWindowContent" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>

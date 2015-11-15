@@ -33,7 +33,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
 
   @Override
   public String getColumnName(int column) {
-    String value;
+    String value = null;
     switch (column) {
       case COLUMN_DEVICE:
         value = "Device";
@@ -45,7 +45,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         value = "Action";
         break;
       default:
-        return null;
+        return value;
     }
     return value;
   }
@@ -90,7 +90,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
       case COLUMN_ACTION:
         break;
       default:
-        return null;
+        return value;
     }
     return value;
   }
@@ -117,12 +117,6 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     int startIndex = getRowCount();
     devices.add(value);
     fireTableRowsInserted(startIndex, getRowCount() - 1);
-  }
-
-  public void remove(Device value) {
-    int startIndex = devices.indexOf(value);
-    devices.remove(value);
-    fireTableRowsInserted(startIndex, startIndex);
   }
 
   public Device get(int index) {

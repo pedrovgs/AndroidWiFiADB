@@ -31,7 +31,7 @@
       <toolWindow id="Android WiFi ADB"
               icon="/icons/androidWiFiADBIcon.png"
               anchor="right"
-              factoryClass="com.github.pedrovgs.androidwifiadb.view.AndroidWiFiADBAction">
+              factoryClass="com.github.pedrovgs.androidwifiadb.view.AndroidWiFiADBWindow">
       </toolWindow>
   </extensions>
 

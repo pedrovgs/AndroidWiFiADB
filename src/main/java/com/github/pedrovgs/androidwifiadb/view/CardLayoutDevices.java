@@ -35,6 +35,7 @@ public class CardLayoutDevices implements ActionButtonListener {
 
   private static final String CARD_DEVICES = "Card with JTable devices";
   private static final String CARD_NO_DEVICES = "Card with no devices info";
+  private static final String NO_DEVICE_CONNECTED = "No devices connected.";
 
   private Container parentContainer;
   private JPanel cards;
@@ -65,7 +66,7 @@ public class CardLayoutDevices implements ActionButtonListener {
   }
 
   public void updateUi() {
-    if (devices != null && devices.size() > 0) {
+    if (devices != null && !devices.isEmpty()) {
       showCard(CARD_DEVICES);
       updateDevicesTable();
     } else {
@@ -88,7 +89,7 @@ public class CardLayoutDevices implements ActionButtonListener {
   }
 
   private void setupUi() {
-    if (devices != null && devices.size() > 0) {
+    if (devices != null && !devices.isEmpty()) {
       showCard(CARD_DEVICES);
     } else {
       showCard(CARD_NO_DEVICES);
@@ -102,7 +103,7 @@ public class CardLayoutDevices implements ActionButtonListener {
 
   private void createNoDevicesPanel() {
     panelNoDevices = new JPanel(new BorderLayout());
-    JLabel labelNoDevices = new JLabel("No devices connected.");
+    JLabel labelNoDevices = new JLabel(NO_DEVICE_CONNECTED);
     labelNoDevices.setHorizontalAlignment(SwingConstants.CENTER);
     panelNoDevices.add(labelNoDevices);
   }
