@@ -21,7 +21,7 @@ import com.intellij.notification.NotificationType;
 
 import static com.github.pedrovgs.androidwifiadb.util.NotificationUtils.showNotification;
 
-public class NotificationView implements View{
+public class NotificationView implements View {
   @Override public void showNoConnectedDevicesNotification() {
     showNotification("There are no devices connected. Review your USB connection and try again.",
         NotificationType.INFORMATION);

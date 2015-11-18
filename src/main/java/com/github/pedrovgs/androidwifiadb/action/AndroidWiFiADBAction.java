@@ -17,21 +17,13 @@
 package com.github.pedrovgs.androidwifiadb.action;
 
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
-import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.view.NotificationView;
-import com.github.pedrovgs.androidwifiadb.view.View;
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
 import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationGroup;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
-
-import static com.github.pedrovgs.androidwifiadb.util.NotificationUtils.showNotification;
 
 public class AndroidWiFiADBAction extends AnAction {
 

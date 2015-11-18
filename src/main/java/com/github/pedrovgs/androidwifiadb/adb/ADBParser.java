@@ -75,7 +75,7 @@ public class ADBParser {
     Matcher portMatcher =
         Pattern.compile("(?<=\\[(service\\.adb\\.tcp\\.port).: \\[)([^\\]]+)(?=\\])")
             .matcher(getPropOutput);
-    if(portMatcher.find()) {
+    if (portMatcher.find()) {
       return portMatcher.group(0);
     }
     return "";

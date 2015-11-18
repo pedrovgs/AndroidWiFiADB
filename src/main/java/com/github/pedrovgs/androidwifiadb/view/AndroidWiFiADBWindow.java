@@ -21,10 +21,6 @@ import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
 import com.github.pedrovgs.androidwifiadb.Device;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationGroup;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -35,8 +31,6 @@ import com.intellij.ui.content.ContentFactory;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
-
-import static com.github.pedrovgs.androidwifiadb.util.NotificationUtils.showNotification;
 
 public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
 
