@@ -19,6 +19,8 @@ package com.github.pedrovgs.androidwifiadb.adb;
 import com.github.pedrovgs.androidwifiadb.Device;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ADBParser {
 
@@ -29,6 +31,8 @@ public class ADBParser {
   private static final String START_DEVICE_IP_INDICATOR = "inet";
   private static final String ERROR_PARSING_DEVICE_IP_KEY = "Object";
   private static final String DAEMON_INDICATOR = "daemon";
+  private static final String START_TCPIP_PORT_INDICATOR = "[service.adb.tcp.port]: [";
+  private static final String DEVICE_NOT_FOUND = "error: device '(null)' not found";
 
   public List<Device> parseGetDevicesOutput(String adbDevicesOutput) {
     List<Device> devices = new LinkedList<Device>();
@@ -57,9 +61,24 @@ public class ADBParser {
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
     }
-    int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
     int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
+    int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
     return ipInfo.substring(start, end);
+  }
+
+  public String parseAdbServiceTcpPort(String getPropOutput) {
+    if (getPropOutput.isEmpty() || getPropOutput.contains(DEVICE_NOT_FOUND)
+        || !getPropOutput.contains(START_TCPIP_PORT_INDICATOR)) {
+      return "";
+    }
+
+    Matcher portMatcher =
+        Pattern.compile("(?<=\\[(service\\.adb\\.tcp\\.port).: \\[)([^\\]]+)(?=\\])")
+            .matcher(getPropOutput);
+    if(portMatcher.find()) {
+      return portMatcher.group(0);
+    }
+    return "";
   }
 
   private String parseDeviceName(String line) {

@@ -19,17 +19,21 @@ package com.github.pedrovgs.androidwifiadb.adb;
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.openapi.project.Project;
 
-import org.jetbrains.android.sdk.AndroidSdkUtils;
+import com.intellij.util.EnvironmentUtil;
 
 import java.io.File;
 import java.util.List;
 
 public class ADB {
 
+  private static final String ANDROID_ENV_VAR_NAME = "ANDROID_HOME";
+  private static final String ADB_RELATIVE_PATH =
+      File.separator + "platform-tools" + File.separator + "adb";
+  private static final String TCPIP_PORT = "5555";
+
   private final CommandLine commandLine;
   private final ADBParser adbParser;
   private Project project;
-  private boolean isTCPEnabled = false;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
@@ -37,7 +41,8 @@ public class ADB {
   }
 
   public boolean isInstalled() {
-    return AndroidSdkUtils.isAndroidSdkAvailable();
+    String versionCommand = getCommand("version");
+    return !commandLine.executeCommand(versionCommand).isEmpty();
   }
 
   public List<Device> getDevicesConnectedByUSB() {
@@ -96,20 +101,29 @@ public class ADB {
   }
 
   private void enableTCPCommand() {
-    if (!isTCPEnabled) {
-      String enableTCPCommand = getCommand("tcpip 5555");
+    if (!checkTCPCommandExecuted()) {
+      String enableTCPCommand = getCommand("tcpip " + TCPIP_PORT);
       commandLine.executeCommand(enableTCPCommand);
-      isTCPEnabled = true;
     }
   }
 
+  private boolean checkTCPCommandExecuted() {
+    String getPropCommand = getCommand("adb shell getprop | grep adb");
+    String getPropOutput = commandLine.executeCommand(getPropCommand);
+    String adbTcpPort =  adbParser.parseAdbServiceTcpPort(getPropOutput);
+    return TCPIP_PORT.equals(adbTcpPort);
+  }
+
   private String getAdbPath() {
-    String adbPath = "";
-    File adbFile = AndroidSdkUtils.getAdb(project);
-    if (adbFile != null) {
-      adbPath = adbFile.getAbsolutePath();
+    String androidSdkPath = EnvironmentUtil.getValue(ANDROID_ENV_VAR_NAME);
+    if (androidSdkPath == null || androidSdkPath.isEmpty()) {
+      return "";
     }
-    return adbPath;
+    String adbPath = ADB_RELATIVE_PATH;
+    String separator =
+        androidSdkPath.substring(androidSdkPath.length() - 1).equals(File.separator) ? ""
+            : File.separator;
+    return androidSdkPath + separator + adbPath;
   }
 
   private String getCommand(String command) {
