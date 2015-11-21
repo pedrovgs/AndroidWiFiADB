@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb.view;
+package com.github.pedrovgs.androidwifiadb.window;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -23,10 +23,6 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
-
-
-import static com.github.pedrovgs.androidwifiadb.view.ConnectDisconnectPanel.ACTION_CONNECT;
-import static com.github.pedrovgs.androidwifiadb.view.ConnectDisconnectPanel.ACTION_DISCONNECT;
 
 public class ConnectDisconnectEditor extends DefaultCellEditor {
     private boolean clicked;
@@ -60,9 +56,9 @@ public class ConnectDisconnectEditor extends DefaultCellEditor {
     @Override
     public Object getCellEditorValue() {
         if (clicked && listener != null) {
-            if (ACTION_CONNECT.equals(clickedButtonAction)) {
+            if (ConnectDisconnectPanel.ACTION_CONNECT.equals(clickedButtonAction)) {
                 listener.onConnectClick(row);
-            } else if (ACTION_DISCONNECT.equals(clickedButtonAction)) {
+            } else if (ConnectDisconnectPanel.ACTION_DISCONNECT.equals(clickedButtonAction)) {
                 listener.onDisconnectClick(row);
             }
         }

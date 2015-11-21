@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb.view;
+package com.github.pedrovgs.androidwifiadb.window;
 
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.ui.table.JBTable;

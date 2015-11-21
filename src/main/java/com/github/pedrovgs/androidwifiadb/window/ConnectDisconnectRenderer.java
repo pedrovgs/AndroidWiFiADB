@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb.view;
+package com.github.pedrovgs.androidwifiadb.window;
 
 import java.awt.Component;
 

@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb.view;
+package com.github.pedrovgs.androidwifiadb.window;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
 import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
 import com.github.pedrovgs.androidwifiadb.Device;
+import com.github.pedrovgs.androidwifiadb.view.NotificationView;
+import com.github.pedrovgs.androidwifiadb.window.CardLayoutDevices;
+import com.github.pedrovgs.androidwifiadb.window.DeviceAction;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
