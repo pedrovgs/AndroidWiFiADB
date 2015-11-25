@@ -28,7 +28,11 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
   private static final int COLUMN_STATE = 1;
   private static final int COLUMN_ACTION = 2;
   private static final int COLUMN_COUNT = 3;
-
+  private static final String DEVICE = "Device";
+  private static final String STATE = "State";
+  private static final String ACTION = "Action";
+  private static final String CONNECTED = "connected";
+  private static final String DISCONNECTED = "disconnected";
   private final List<Device> devices = new ArrayList<Device>();
 
   @Override
@@ -36,13 +40,13 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
     String value = null;
     switch (column) {
       case COLUMN_DEVICE:
-        value = "Device";
+        value = DEVICE;
         break;
       case COLUMN_STATE:
-        value = "State";
+        value = STATE;
         break;
       case COLUMN_ACTION:
-        value = "Action";
+        value = ACTION;
         break;
       default:
         return value;
@@ -85,7 +89,7 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
         value = obj.toString();
         break;
       case COLUMN_STATE:
-        value = obj.isConnected() ? "connected" : "disconnected";
+        value = obj.isConnected() ? CONNECTED : DISCONNECTED;
         break;
       case COLUMN_ACTION:
         break;

@@ -54,10 +54,9 @@ public class AndroidWiFiADB {
     if (!isADBInstalled()) {
       return false;
     }
-    List<Device> connected = adb.getDevicesConnectedByUSB();
+    final List<Device> connected = adb.getDevicesConnectedByUSB();
     for (Device connectedDevice : connected) {
-      boolean deviceExists = checkDeviceExistance(connectedDevice);
-      if (!deviceExists) {
+      if (!checkDeviceExistance(connectedDevice)) {
         connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
         devices.add(connectedDevice);
       } else {
@@ -105,7 +104,7 @@ public class AndroidWiFiADB {
     showDisconnectionResultNotification(disconnectedDevices);
   }
 
-  private void updateDeviceConnectionState(Device updatedDevice) {
+  private void updateDeviceConnectionState(final Device updatedDevice) {
     for (int i = 0, size = devices.size(); i < size; i++) {
       Device device = devices.get(i);
       if (updatedDevice.getId().equals(device.getId())) {

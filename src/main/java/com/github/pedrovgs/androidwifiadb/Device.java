@@ -16,7 +16,7 @@
 
 package com.github.pedrovgs.androidwifiadb;
 
-public class Device {
+public class Device implements Cloneable {
 
   private String name;
   private final String id;
@@ -63,5 +63,35 @@ public class Device {
       builder.append(" (").append(ip).append(")");
     }
     return builder.toString();
+  }
+
+  @Override public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Device device = (Device) o;
+
+    if (connected != device.connected) return false;
+    if (name != null ? !name.equals(device.name) : device.name != null) return false;
+    if (id != null ? !id.equals(device.id) : device.id != null) return false;
+    return !(ip != null ? !ip.equals(device.ip) : device.ip != null);
+  }
+
+  @Override public int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (id != null ? id.hashCode() : 0);
+    result = 31 * result + (ip != null ? ip.hashCode() : 0);
+    result = 31 * result + (connected ? 1 : 0);
+    return result;
+  }
+
+  @Override protected Device clone() {
+    Device clone;
+    try {
+      clone = (Device) super.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new RuntimeException(e);
+    }
+    return clone;
   }
 }
