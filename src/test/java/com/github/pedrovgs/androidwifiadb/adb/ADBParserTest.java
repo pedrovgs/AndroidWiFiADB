@@ -38,6 +38,19 @@ public class ADBParserTest extends UnitTest {
   private static final String GET_IP_OUTPUT =
       "21: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000\n"
           + "    inet 192.168.1.128/24 brd 192.168.1.255 scope global wlan0";
+  private static final String GET_ADB_PROP_DEVICE_NOT_FOUND = "error: device '(null)' not found";
+  private static final String GET_ADP_PROP_NO_TCP_PORT_INFO = "[init.svc.adbd]: [running]\n"
+      + "[persist.sys.usb.config]: [mtp,adb]\n"
+      + "[ro.adb.secure]: [1]\n"
+      + "[sys.usb.config]: [mtp,adb]\n"
+      + "[sys.usb.state]: [mtp,adb]";
+  private static final String TCPIP_PORT = "5555";
+  private static final String GET_ADB_PROP_WITH_TCP_PORT = "  [init.svc.adbd]: [running]\n"
+      + "  [persist.sys.usb.config]: [mtp,adb]\n"
+      + "  [ro.adb.secure]: [1]\n"
+      + "  [service.adb.tcp.port]: [" + TCPIP_PORT + "]\n"
+      + "  [sys.usb.config]: [mtp,adb]\n"
+      + "  [sys.usb.state]: [mtp,adb]\n";
 
   @Test
   public void shouldParseAdbDevicesOutputAndReturnTheListOfDevicesWithJustOneDeviceConnected() {
@@ -98,6 +111,33 @@ public class ADBParserTest extends UnitTest {
     String deviceIp = parser.parseGetDeviceIp("");
 
     assertEquals("", deviceIp);
+  }
+
+  @Test
+  public void shouldReturnEmptyStringIfDeviceNotFound() throws Exception {
+    ADBParser parser = givenAADBParser();
+
+    String tcpPort = parser.parseAdbServiceTcpPort(GET_ADB_PROP_DEVICE_NOT_FOUND);
+
+    assertEquals("", tcpPort);
+  }
+
+  @Test
+  public void shouldReturnEmptyStringIfAdbPropertiesDoesNotContainTCPPort() throws Exception {
+    ADBParser parser = givenAADBParser();
+
+    String tcpPort = parser.parseAdbServiceTcpPort(GET_ADP_PROP_NO_TCP_PORT_INFO);
+
+    assertEquals("", tcpPort);
+  }
+
+  @Test
+  public void shouldReturnTCPPort() throws Exception {
+    ADBParser parser = givenAADBParser();
+
+    String tcpPort = parser.parseAdbServiceTcpPort(GET_ADB_PROP_WITH_TCP_PORT);
+
+    assertEquals(TCPIP_PORT, tcpPort);
   }
 
   private ADBParser givenAADBParser() {

@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.pedrovgs.androidwifiadb;
+package com.github.pedrovgs.androidwifiadb.window;
 
-public interface View {
+public interface ActionButtonListener {
+  void onConnectClick(int row);
 
-  void showNoConnectedDevicesNotification();
-
-  void showConnectedDeviceNotification(Device device);
-
-  void showErrorConnectingDeviceNotification(Device device);
-
-  void showADBNotInstalledNotification();
+  void onDisconnectClick(int row);
 }

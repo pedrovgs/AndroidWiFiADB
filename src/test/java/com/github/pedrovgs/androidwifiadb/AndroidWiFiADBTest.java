@@ -17,11 +17,19 @@
 package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
+import com.github.pedrovgs.androidwifiadb.view.View;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +37,8 @@ public class AndroidWiFiADBTest extends UnitTest {
 
   private static final int SOME_DEVICES = 4;
   private static final String ANY_DEVICE_NAME = "Device nº ";
+  private static final String ANY_DEVICE_ID = "abcdef123";
+  private static final String ANY_DEVICE_IP = "0.0.0.0";
 
   @Mock private ADB adb;
   @Mock private View view;
@@ -75,6 +85,72 @@ public class AndroidWiFiADBTest extends UnitTest {
     }
   }
 
+  @Test
+  public void shouldNotRefreshDevicesListIfAdbIsNotIstalled() throws Exception {
+    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    givenADBIsNotInstalled();
+
+    assertFalse(sut.refreshDevicesList());
+  }
+
+  @Test
+  public void shouldRefreshDevicesListAddNewDevice() throws Exception {
+    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
+    givenDevicesAreConnectedSuccessfully(devices);
+    givenAnyIpToDevices();
+
+    assertEquals(0, sut.getDevices().size());
+    sut.refreshDevicesList();
+    assertEquals(devices.size(), sut.getDevices().size());
+  }
+
+  @Test
+  public void shouldRefreshDevicesListUpdateExistingDevices() throws Exception {
+    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
+    givenDevicesAreConnectedSuccessfully(devices);
+
+    sut.connectDevices();
+    sut.refreshDevicesList();
+
+    assertEquals(devices.size(), sut.getDevices().size());
+  }
+
+  @Test
+  public void shouldDisconnectDevice() throws Exception {
+    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    givenADBIsInstalled();
+    Device device = givenAnyConnectedDevice();
+    givenDevicesAreDisconnectedSuccessfully(Arrays.asList(device));
+
+    sut.disconnectDevice(device);
+
+    assertFalse(device.isConnected());
+  }
+
+  @Test
+  public void shouldConnectDevice() throws Exception {
+    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    givenADBIsInstalled();
+    Device device = givenAnyDisonnectedDevice();
+    givenDevicesAreConnectedSuccessfully(Arrays.asList(device));
+
+    sut.connectDevice(device);
+
+    assertTrue(device.isConnected());
+  }
+
+  private Device givenAnyConnectedDevice() {
+    Device device = new Device(ANY_DEVICE_NAME, ANY_DEVICE_ID);
+    device.setConnected(true);
+    return device;
+  }
+
+  private Device givenAnyDisonnectedDevice() {
+    return new Device(ANY_DEVICE_NAME, ANY_DEVICE_ID);
+  }
+
   private void givenDevicesAreNotConnectedSuccessfully(List<Device> devices) {
     for (Device device : devices) {
       device.setConnected(false);
@@ -88,13 +164,24 @@ public class AndroidWiFiADBTest extends UnitTest {
       device.setConnected(true);
     }
     when(adb.getDevicesConnectedByUSB()).thenReturn(devices);
-    when(adb.connectDevices(devices)).thenReturn(devices);
+    when(adb.connectDevices(devices)).thenReturn(new ArrayList<Device>(devices));
+  }
+
+  private void givenDevicesAreDisconnectedSuccessfully(final List<Device> devices) {
+    for (Device device : devices) {
+      device.setConnected(false);
+    }
+    when(adb.disconnectDevices(devices)).thenReturn(devices);
   }
 
   private List<Device> givenThereAreSomeDevicesConnectedByUSB() {
     when(adb.isInstalled()).thenReturn(true);
+    return getSomeDevices(SOME_DEVICES);
+  }
+
+  private List<Device> getSomeDevices(int devicesCount) {
     List<Device> devices = new LinkedList<Device>();
-    for (int i = 0; i < SOME_DEVICES; i++) {
+    for (int i = 0; i < devicesCount; i++) {
       String name = ANY_DEVICE_NAME + i;
       String id = String.valueOf(i);
       Device device = new Device(name, id);
@@ -110,6 +197,14 @@ public class AndroidWiFiADBTest extends UnitTest {
 
   private void givenADBIsNotInstalled() {
     when(adb.isInstalled()).thenReturn(false);
+  }
+
+  private void givenADBIsInstalled() {
+    when(adb.isInstalled()).thenReturn(true);
+  }
+
+  private void givenAnyIpToDevices() {
+    when(adb.getDeviceIp((Device) anyObject())).thenReturn(ANY_DEVICE_IP);
   }
 
   private AndroidWiFiADB givenAnAndroidWiFiADB() {

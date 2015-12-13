@@ -2,3 +2,10 @@ language: java
 
 script:
   ./gradlew checkstyle build
+
+jdk: oraclejdk7
+env:
+  matrix:
+  - TERM=dumb
+after_success:
+- ./gradlew test jacocoTestReport coveralls
