@@ -17,9 +17,8 @@
 package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
-import com.intellij.openapi.project.Project;
 import com.github.pedrovgs.androidwifiadb.view.View;
-
+import com.intellij.openapi.project.Project;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class AndroidWiFiADB {
 
   private final ADB adb;
   private final View view;
-  private List<Device> devices;
+  private final List<Device> devices;
 
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
@@ -40,13 +39,14 @@ public class AndroidWiFiADB {
       view.showADBNotInstalledNotification();
       return;
     }
-    devices = adb.getDevicesConnectedByUSB();
-    if (devices.isEmpty()) {
+    List<Device> connectedDevices = adb.getDevicesConnectedByUSB();
+    if (connectedDevices.isEmpty()) {
       view.showNoConnectedDevicesNotification();
       return;
     }
 
-    devices = adb.connectDevices(devices);
+    devices.clear();
+    devices.addAll(adb.connectDevices(connectedDevices));
     showConnectionResultNotification(devices);
   }
 
