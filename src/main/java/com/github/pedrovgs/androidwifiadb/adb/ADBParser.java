@@ -61,9 +61,14 @@ public class ADBParser {
     if (ipInfo.isEmpty() || ipInfo.contains(ERROR_PARSING_DEVICE_IP_KEY)) {
       return "";
     }
-    int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
-    int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
-    return ipInfo.substring(start, end);
+    try {
+      int start = ipInfo.indexOf(START_DEVICE_IP_INDICATOR) + 5;
+      int end = ipInfo.indexOf(END_DEVICE_IP_INDICATOR);
+      return ipInfo.substring(start, end);
+    } catch (StringIndexOutOfBoundsException e) {
+      System.out.println(e);
+      return "";
+    }
   }
 
   public String parseAdbServiceTcpPort(String getPropOutput) {

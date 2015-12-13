@@ -23,6 +23,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -43,7 +44,7 @@ public class CardLayoutDevices implements ActionButtonListener {
   private JPanel panelNoDevices;
   private JPanel panelDevices;
   private JTable tableDevices;
-  private List<Device> devices;
+  private Collection<Device> devices;
   private DeviceAction deviceAction;
 
   public CardLayoutDevices(Container parentContainer, DeviceAction action) {
@@ -52,7 +53,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     this.devices = new ArrayList<Device>();
   }
 
-  public void setDevices(List<Device> devices) {
+  public void setDevices(Collection<Device> devices) {
     this.devices = devices;
   }
 

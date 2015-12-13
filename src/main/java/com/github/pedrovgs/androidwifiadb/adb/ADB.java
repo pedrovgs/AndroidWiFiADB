@@ -19,6 +19,7 @@ package com.github.pedrovgs.androidwifiadb.adb;
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.util.EnvironmentUtil;
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 public class ADB {
@@ -41,13 +42,13 @@ public class ADB {
     return !commandLine.executeCommand(versionCommand).isEmpty();
   }
 
-  public List<Device> getDevicesConnectedByUSB() {
+  public Collection<Device> getDevicesConnectedByUSB() {
     String getDevicesCommand = getCommand("devices -l");
     String adbDevicesOutput = commandLine.executeCommand(getDevicesCommand);
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }
 
-  public List<Device> connectDevices(List<Device> devices) {
+  public Collection<Device> connectDevices(Collection<Device> devices) {
     for (Device device : devices) {
       boolean connected = connectDeviceByIp(device);
       device.setConnected(connected);
