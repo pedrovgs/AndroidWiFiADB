@@ -21,7 +21,9 @@ Devices dashboard:
 Usage
 -----
 
-Connect your device to your computer using a USB cable. Then press the button and disconnect your USB once the plugin connects your device over WiFi. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection.  
+Connect your device to your computer using a USB cable. Then press the button and disconnect your USB once the plugin connects your device over WiFi. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection.
+  
+If you want to handle your devices connection individually, open the Android WiFi ADB dashboard you will find at the right of your IDE.  
 
 Installation
 ------------
