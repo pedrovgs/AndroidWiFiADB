@@ -18,14 +18,11 @@ package com.github.pedrovgs.androidwifiadb.window;
 
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.ui.table.JBTable;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -133,8 +130,9 @@ public class CardLayoutDevices implements ActionButtonListener {
     tableDevices.getColumnModel().getColumn(2).setMinWidth(215);
     tableDevices.getColumnModel().getColumn(2).setMaxWidth(215);
     tableDevices.getColumnModel().getColumn(2).setCellRenderer(new ConnectDisconnectRenderer());
-    tableDevices.getColumnModel().getColumn(2).setCellEditor(
-        new ConnectDisconnectEditor(new JCheckBox(), this));
+    tableDevices.getColumnModel()
+        .getColumn(2)
+        .setCellEditor(new ConnectDisconnectEditor(new JCheckBox(), this));
   }
 
   private void updateDevicesTable() {

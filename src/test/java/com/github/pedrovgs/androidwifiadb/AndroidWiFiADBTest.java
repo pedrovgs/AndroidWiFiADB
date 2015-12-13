@@ -18,7 +18,6 @@ package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.view.View;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -30,7 +29,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -86,16 +84,14 @@ public class AndroidWiFiADBTest extends UnitTest {
     }
   }
 
-  @Test
-  public void shouldNotRefreshDevicesListIfAdbIsNotIstalled() throws Exception {
+  @Test public void shouldNotRefreshDevicesListIfAdbIsNotIstalled() throws Exception {
     AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsNotInstalled();
 
     assertFalse(androidWiFiAdb.refreshDevicesList());
   }
 
-  @Test
-  public void shouldRefreshDevicesListAddNewDevice() throws Exception {
+  @Test public void shouldRefreshDevicesListAddNewDevice() throws Exception {
     AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreConnectedSuccessfully(devices);
@@ -106,8 +102,7 @@ public class AndroidWiFiADBTest extends UnitTest {
     assertEquals(devices.size(), androidWiFiAdb.getDevices().size());
   }
 
-  @Test
-  public void shouldRefreshDevicesListUpdateExistingDevices() throws Exception {
+  @Test public void shouldRefreshDevicesListUpdateExistingDevices() throws Exception {
     AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreConnectedSuccessfully(devices);
@@ -118,8 +113,7 @@ public class AndroidWiFiADBTest extends UnitTest {
     assertEquals(devices.size(), androidWiFiAdb.getDevices().size());
   }
 
-  @Test
-  public void shouldDisconnectDevice() throws Exception {
+  @Test public void shouldDisconnectDevice() throws Exception {
     AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsInstalled();
     Device device = givenAnyConnectedDevice();
@@ -130,8 +124,7 @@ public class AndroidWiFiADBTest extends UnitTest {
     assertFalse(device.isConnected());
   }
 
-  @Test
-  public void shouldConnectDevice() throws Exception {
+  @Test public void shouldConnectDevice() throws Exception {
     AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsInstalled();
     Device device = givenAnyDisonnectedDevice();

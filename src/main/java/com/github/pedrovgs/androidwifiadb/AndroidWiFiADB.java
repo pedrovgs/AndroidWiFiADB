@@ -20,16 +20,16 @@ import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.view.View;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class AndroidWiFiADB {
 
+  private static final Set<Device> DEVICES = new HashSet<Device>();
   private final ADB adb;
   private final View view;
-  private static final Set<Device> devices = new LinkedHashSet<Device>();
 
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
@@ -41,15 +41,15 @@ public class AndroidWiFiADB {
       view.showADBNotInstalledNotification();
       return;
     }
-    devices.clear();
-    devices.addAll(adb.getDevicesConnectedByUSB());
-    if (devices.isEmpty()) {
+    DEVICES.clear();
+    DEVICES.addAll(adb.getDevicesConnectedByUSB());
+    if (DEVICES.isEmpty()) {
       view.showNoConnectedDevicesNotification();
       return;
     }
 
-    devices.addAll(adb.connectDevices(devices));
-    showConnectionResultNotification(devices);
+    DEVICES.addAll(adb.connectDevices(DEVICES));
+    showConnectionResultNotification(DEVICES);
   }
 
   public boolean refreshDevicesList() {
@@ -61,7 +61,7 @@ public class AndroidWiFiADB {
     for (Device connectedDevice : connected) {
       if (!checkDeviceExistance(connectedDevice)) {
         connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
-        devices.add(connectedDevice);
+        DEVICES.add(connectedDevice);
       } else {
         updateDeviceConnectionState(connectedDevice);
       }
@@ -71,17 +71,17 @@ public class AndroidWiFiADB {
 
   private void removeNotConnectedDevices() {
     List<Device> connectedDevices = new LinkedList<Device>();
-    for (Device device : devices){
-        if (device.isConnected()){
-          connectedDevices.add(device);
-        }
+    for (Device device : DEVICES) {
+      if (device.isConnected()) {
+        connectedDevices.add(device);
+      }
     }
-    devices.clear();
-    devices.addAll(connectedDevices);
+    DEVICES.clear();
+    DEVICES.addAll(connectedDevices);
   }
 
   public Collection<Device> getDevices() {
-    return devices;
+    return DEVICES;
   }
 
   public void connectDevice(Device device) {
@@ -115,12 +115,12 @@ public class AndroidWiFiADB {
   }
 
   private void updateDeviceConnectionState(final Device updatedDevice) {
-    devices.add(updatedDevice);
+    DEVICES.add(updatedDevice);
   }
 
   private boolean checkDeviceExistance(Device connectedDevice) {
     boolean deviceExists = false;
-    for (Device device : devices) {
+    for (Device device : DEVICES) {
       if (connectedDevice.getId().equals(device.getId())) {
         deviceExists = true;
       }

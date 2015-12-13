@@ -125,7 +125,8 @@ public class AndroidDevicesTableModelTest extends UnitTest {
 
     androidDevicesTableModel.add(givenAnyDevice());
 
-    assertFalse(androidDevicesTableModel.isCellEditable(0, COLUMN_STATE) || androidDevicesTableModel.isCellEditable(0, COLUMN_DEVICE));
+    assertFalse(androidDevicesTableModel.isCellEditable(0, COLUMN_STATE)
+        || androidDevicesTableModel.isCellEditable(0, COLUMN_DEVICE));
     assertTrue(androidDevicesTableModel.isCellEditable(0, COLUMN_ACTION));
   }
 
