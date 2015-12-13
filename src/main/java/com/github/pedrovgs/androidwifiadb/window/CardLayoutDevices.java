@@ -30,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class CardLayoutDevices implements ActionButtonListener {
 
@@ -122,6 +123,8 @@ public class CardLayoutDevices implements ActionButtonListener {
   }
 
   private void configureTableAppearance() {
+    tableDevices.setOpaque(false);
+    ((DefaultTableCellRenderer) tableDevices.getDefaultRenderer(Object.class)).setOpaque(false);
     tableDevices.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     tableDevices.getColumnModel().getColumn(0).setPreferredWidth(100);
     tableDevices.getColumnModel().getColumn(1).setMinWidth(85);

@@ -31,12 +31,13 @@ public class ConnectDisconnectPanel extends JPanel {
 
   public ConnectDisconnectPanel() {
     setLayout(new GridBagLayout());
+    setOpaque(false);
     connect = new JButton(ACTION_CONNECT);
     connect.setActionCommand(ACTION_CONNECT);
-    connect.setOpaque(true);
+    connect.setOpaque(false);
     disconnect = new JButton(ACTION_DISCONNECT);
     disconnect.setActionCommand(ACTION_DISCONNECT);
-    disconnect.setOpaque(true);
+    disconnect.setOpaque(false);
 
     add(connect);
     add(disconnect);
