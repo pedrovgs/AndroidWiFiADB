@@ -31,8 +31,8 @@ public class AndroidDevicesTableModel extends AbstractTableModel {
   private static final String DEVICE = "Device";
   private static final String STATE = "State";
   private static final String ACTION = "Action";
-  private static final String CONNECTED = "connected";
-  private static final String DISCONNECTED = "disconnected";
+  private static final String CONNECTED = "Connected";
+  private static final String DISCONNECTED = "Disconnected";
   private final List<Device> devices = new ArrayList<Device>();
 
   @Override
