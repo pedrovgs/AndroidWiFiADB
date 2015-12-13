@@ -41,8 +41,8 @@ public class AndroidDevicesTableModelTest extends UnitTest {
   private static final int COLUMN_WITH_NOT_VALID_INDEX = -1;
   private static final String ANY_DEVICE_ID = "abcdef";
   private static final String ANY_DEVICE_NAME = "test_name";
-  private static final String CONNECTED = "connected";
-  private static final String DISCONNECTED = "disconnected";
+  private static final String CONNECTED = "Connected";
+  private static final String DISCONNECTED = "Disconnected";
 
   @Mock
   TableModelListener tableModelListener;
