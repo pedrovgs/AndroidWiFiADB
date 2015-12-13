@@ -10,8 +10,12 @@ Android WiFi ADB - IntelliJ/Android Studio Plugin [![Build Status](https://travi
 
 Screenshots
 -----------
+Connect all devices button:
 
 ![Android WiFi ADB Usage][2]
+
+Devices dashboard:
+
 ![Android Devices Window][7]
 
 Usage
