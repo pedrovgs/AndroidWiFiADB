@@ -22,7 +22,6 @@ Usage
 -----
 
 Connect your device to your computer using a USB cable. Then press the button and disconnect your USB once the plugin connects your device over WiFi. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection.  
-=======
 
 Installation
 ------------
