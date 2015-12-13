@@ -19,7 +19,7 @@
       1.0: Initial version.<br>
       1.1: Fixes for Windows and Linux.<br>
       1.2: Remove the usage of the ANDROID_HOME environment variable. This variable is not needed now.<br>
-      2.0: Add a new Android WiFi ADB control panel showing all the devices connected by USB to be able to connect devices individually.
+      2.0: Add a new Android WiFi ADB control panel showing all the devices connected by USB to be able to connect/disconnect devices individually.
     ]]>
   </change-notes>
 
