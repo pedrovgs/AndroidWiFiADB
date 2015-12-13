@@ -50,8 +50,6 @@ public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
   }
 
   @Override public void createToolWindowContent(Project project, ToolWindow toolWindow) {
-    this.androidWifiADB.updateProject(project);
-
     createToolWindowContent(toolWindow);
     setupUI();
     monitorDevices();

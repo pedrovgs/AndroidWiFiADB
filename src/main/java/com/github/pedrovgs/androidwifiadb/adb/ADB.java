@@ -17,11 +17,9 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
 import com.github.pedrovgs.androidwifiadb.Device;
-import com.intellij.openapi.project.Project;
-
 import com.intellij.util.EnvironmentUtil;
-
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 public class ADB {
@@ -33,7 +31,6 @@ public class ADB {
 
   private final CommandLine commandLine;
   private final ADBParser adbParser;
-  private Project project;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
@@ -45,13 +42,13 @@ public class ADB {
     return !commandLine.executeCommand(versionCommand).isEmpty();
   }
 
-  public List<Device> getDevicesConnectedByUSB() {
+  public Collection<Device> getDevicesConnectedByUSB() {
     String getDevicesCommand = getCommand("devices -l");
     String adbDevicesOutput = commandLine.executeCommand(getDevicesCommand);
     return adbParser.parseGetDevicesOutput(adbDevicesOutput);
   }
 
-  public List<Device> connectDevices(List<Device> devices) {
+  public Collection<Device> connectDevices(Collection<Device> devices) {
     for (Device device : devices) {
       boolean connected = connectDeviceByIp(device);
       device.setConnected(connected);
@@ -72,10 +69,6 @@ public class ADB {
       device.setConnected(disconnected);
     }
     return devices;
-  }
-
-  public void updateProject(Project project) {
-    this.project = project;
   }
 
   private boolean connectDeviceByIp(Device device) {
@@ -110,7 +103,7 @@ public class ADB {
   private boolean checkTCPCommandExecuted() {
     String getPropCommand = getCommand("adb shell getprop | grep adb");
     String getPropOutput = commandLine.executeCommand(getPropCommand);
-    String adbTcpPort =  adbParser.parseAdbServiceTcpPort(getPropOutput);
+    String adbTcpPort = adbParser.parseAdbServiceTcpPort(getPropOutput);
     return TCPIP_PORT.equals(adbTcpPort);
   }
 

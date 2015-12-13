@@ -16,10 +16,10 @@
 
 package com.github.pedrovgs.androidwifiadb;
 
-public class Device implements Cloneable {
+public class Device {
 
-  private String name;
   private final String id;
+  private String name;
   private String ip = "";
   private boolean connected;
 
@@ -30,6 +30,10 @@ public class Device implements Cloneable {
 
   public String getName() {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public String getId() {
@@ -44,10 +48,6 @@ public class Device implements Cloneable {
     this.ip = ip;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public boolean isConnected() {
     return connected;
   }
@@ -56,42 +56,24 @@ public class Device implements Cloneable {
     this.connected = connected;
   }
 
-  @Override
-  public String toString() {
-    StringBuilder builder = new StringBuilder(getName());
-    if (!ip.isEmpty()) {
-      builder.append(" (").append(ip).append(")");
-    }
-    return builder.toString();
-  }
-
   @Override public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Device device = (Device) o;
 
-    if (connected != device.connected) return false;
-    if (name != null ? !name.equals(device.name) : device.name != null) return false;
-    if (id != null ? !id.equals(device.id) : device.id != null) return false;
-    return !(ip != null ? !ip.equals(device.ip) : device.ip != null);
+    return id.equals(device.id);
   }
 
   @Override public int hashCode() {
-    int result = name != null ? name.hashCode() : 0;
-    result = 31 * result + (id != null ? id.hashCode() : 0);
-    result = 31 * result + (ip != null ? ip.hashCode() : 0);
-    result = 31 * result + (connected ? 1 : 0);
-    return result;
+    return id.hashCode();
   }
 
-  @Override protected Device clone() {
-    Device clone;
-    try {
-      clone = (Device) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new RuntimeException(e);
-    }
-    return clone;
+  @Override public String toString() {
+    return name;
   }
 }

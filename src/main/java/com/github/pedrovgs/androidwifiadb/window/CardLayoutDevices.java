@@ -18,13 +18,11 @@ package com.github.pedrovgs.androidwifiadb.window;
 
 import com.github.pedrovgs.androidwifiadb.Device;
 import com.intellij.ui.table.JBTable;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Collection;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -43,7 +41,7 @@ public class CardLayoutDevices implements ActionButtonListener {
   private JPanel panelNoDevices;
   private JPanel panelDevices;
   private JTable tableDevices;
-  private List<Device> devices;
+  private Collection<Device> devices;
   private DeviceAction deviceAction;
 
   public CardLayoutDevices(Container parentContainer, DeviceAction action) {
@@ -52,7 +50,7 @@ public class CardLayoutDevices implements ActionButtonListener {
     this.devices = new ArrayList<Device>();
   }
 
-  public void setDevices(List<Device> devices) {
+  public void setDevices(Collection<Device> devices) {
     this.devices = devices;
   }
 
@@ -132,8 +130,9 @@ public class CardLayoutDevices implements ActionButtonListener {
     tableDevices.getColumnModel().getColumn(2).setMinWidth(215);
     tableDevices.getColumnModel().getColumn(2).setMaxWidth(215);
     tableDevices.getColumnModel().getColumn(2).setCellRenderer(new ConnectDisconnectRenderer());
-    tableDevices.getColumnModel().getColumn(2).setCellEditor(
-        new ConnectDisconnectEditor(new JCheckBox(), this));
+    tableDevices.getColumnModel()
+        .getColumn(2)
+        .setCellEditor(new ConnectDisconnectEditor(new JCheckBox(), this));
   }
 
   private void updateDevicesTable() {

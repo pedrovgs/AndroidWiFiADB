@@ -18,7 +18,6 @@ package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.view.View;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -44,29 +43,29 @@ public class AndroidWiFiADBTest extends UnitTest {
   @Mock private View view;
 
   @Test public void shouldShowErrorIfADBIsNotInstalled() {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsNotInstalled();
 
-    sut.connectDevices();
+    androidWiFiAdb.connectDevices();
 
     verify(view).showADBNotInstalledNotification();
   }
 
   @Test public void shouldShowNoConnectedDevicesNotificationIfThereAreNotConnectedDevicesByUSB() {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenThereAreNoConnectedDevices();
 
-    sut.connectDevices();
+    androidWiFiAdb.connectDevices();
 
     verify(view).showNoConnectedDevicesNotification();
   }
 
   @Test public void shouldShowDevicesConnectedIfADBWiFiWhenConnectionIsEstablished() {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreConnectedSuccessfully(devices);
 
-    sut.connectDevices();
+    androidWiFiAdb.connectDevices();
 
     for (Device device : devices) {
       verify(view).showConnectedDeviceNotification(device);
@@ -74,69 +73,64 @@ public class AndroidWiFiADBTest extends UnitTest {
   }
 
   @Test public void shouldShowDeviceConnectionErrorWhenConnectionIsNotEstablished() {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreNotConnectedSuccessfully(devices);
 
-    sut.connectDevices();
+    androidWiFiAdb.connectDevices();
 
     for (Device device : devices) {
       verify(view).showErrorConnectingDeviceNotification(device);
     }
   }
 
-  @Test
-  public void shouldNotRefreshDevicesListIfAdbIsNotIstalled() throws Exception {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+  @Test public void shouldNotRefreshDevicesListIfAdbIsNotIstalled() throws Exception {
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsNotInstalled();
 
-    assertFalse(sut.refreshDevicesList());
+    assertFalse(androidWiFiAdb.refreshDevicesList());
   }
 
-  @Test
-  public void shouldRefreshDevicesListAddNewDevice() throws Exception {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+  @Test public void shouldRefreshDevicesListAddNewDevice() throws Exception {
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreConnectedSuccessfully(devices);
     givenAnyIpToDevices();
 
-    assertEquals(0, sut.getDevices().size());
-    sut.refreshDevicesList();
-    assertEquals(devices.size(), sut.getDevices().size());
+    assertEquals(0, androidWiFiAdb.getDevices().size());
+    androidWiFiAdb.refreshDevicesList();
+    assertEquals(devices.size(), androidWiFiAdb.getDevices().size());
   }
 
-  @Test
-  public void shouldRefreshDevicesListUpdateExistingDevices() throws Exception {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+  @Test public void shouldRefreshDevicesListUpdateExistingDevices() throws Exception {
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     List<Device> devices = givenThereAreSomeDevicesConnectedByUSB();
     givenDevicesAreConnectedSuccessfully(devices);
 
-    sut.connectDevices();
-    sut.refreshDevicesList();
+    androidWiFiAdb.connectDevices();
+    androidWiFiAdb.refreshDevicesList();
 
-    assertEquals(devices.size(), sut.getDevices().size());
+    assertEquals(devices.size(), androidWiFiAdb.getDevices().size());
   }
 
-  @Test
-  public void shouldDisconnectDevice() throws Exception {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+  @Test public void shouldDisconnectDevice() throws Exception {
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsInstalled();
     Device device = givenAnyConnectedDevice();
     givenDevicesAreDisconnectedSuccessfully(Arrays.asList(device));
 
-    sut.disconnectDevice(device);
+    androidWiFiAdb.disconnectDevice(device);
 
     assertFalse(device.isConnected());
   }
 
-  @Test
-  public void shouldConnectDevice() throws Exception {
-    AndroidWiFiADB sut = givenAnAndroidWiFiADB();
+  @Test public void shouldConnectDevice() throws Exception {
+    AndroidWiFiADB androidWiFiAdb = givenAnAndroidWiFiADB();
     givenADBIsInstalled();
     Device device = givenAnyDisonnectedDevice();
     givenDevicesAreConnectedSuccessfully(Arrays.asList(device));
 
-    sut.connectDevice(device);
+    androidWiFiAdb.connectDevice(device);
 
     assertTrue(device.isConnected());
   }

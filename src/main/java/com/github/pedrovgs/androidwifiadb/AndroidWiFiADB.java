@@ -17,22 +17,23 @@
 package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
-import com.intellij.openapi.project.Project;
 import com.github.pedrovgs.androidwifiadb.view.View;
-
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class AndroidWiFiADB {
 
+  private static final Set<Device> DEVICES = new HashSet<Device>();
   private final ADB adb;
   private final View view;
-  private List<Device> devices;
 
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
-    this.devices = new ArrayList<Device>();
   }
 
   public void connectDevices() {
@@ -40,25 +41,27 @@ public class AndroidWiFiADB {
       view.showADBNotInstalledNotification();
       return;
     }
-    devices = adb.getDevicesConnectedByUSB();
-    if (devices.isEmpty()) {
+    DEVICES.clear();
+    DEVICES.addAll(adb.getDevicesConnectedByUSB());
+    if (DEVICES.isEmpty()) {
       view.showNoConnectedDevicesNotification();
       return;
     }
 
-    devices = adb.connectDevices(devices);
-    showConnectionResultNotification(devices);
+    DEVICES.addAll(adb.connectDevices(DEVICES));
+    showConnectionResultNotification(DEVICES);
   }
 
   public boolean refreshDevicesList() {
     if (!isADBInstalled()) {
       return false;
     }
-    final List<Device> connected = adb.getDevicesConnectedByUSB();
+    removeNotConnectedDevices();
+    final Collection<Device> connected = adb.getDevicesConnectedByUSB();
     for (Device connectedDevice : connected) {
       if (!checkDeviceExistance(connectedDevice)) {
         connectedDevice.setIp(adb.getDeviceIp(connectedDevice));
-        devices.add(connectedDevice);
+        DEVICES.add(connectedDevice);
       } else {
         updateDeviceConnectionState(connectedDevice);
       }
@@ -66,12 +69,19 @@ public class AndroidWiFiADB {
     return true;
   }
 
-  public List<Device> getDevices() {
-    return devices;
+  private void removeNotConnectedDevices() {
+    List<Device> connectedDevices = new LinkedList<Device>();
+    for (Device device : DEVICES) {
+      if (device.isConnected()) {
+        connectedDevices.add(device);
+      }
+    }
+    DEVICES.clear();
+    DEVICES.addAll(connectedDevices);
   }
 
-  public void updateProject(Project project) {
-    this.adb.updateProject(project);
+  public Collection<Device> getDevices() {
+    return DEVICES;
   }
 
   public void connectDevice(Device device) {
@@ -80,7 +90,7 @@ public class AndroidWiFiADB {
       return;
     }
 
-    List<Device> connectedDevices = new ArrayList<Device>();
+    Collection<Device> connectedDevices = new ArrayList<Device>();
     connectedDevices.add(device);
     connectedDevices = adb.connectDevices(connectedDevices);
     for (Device connected : connectedDevices) {
@@ -105,19 +115,12 @@ public class AndroidWiFiADB {
   }
 
   private void updateDeviceConnectionState(final Device updatedDevice) {
-    for (int i = 0, size = devices.size(); i < size; i++) {
-      Device device = devices.get(i);
-      if (updatedDevice.getId().equals(device.getId())) {
-        devices.remove(i);
-        device.setName(updatedDevice.getName());
-        devices.add(i, device);
-      }
-    }
+    DEVICES.add(updatedDevice);
   }
 
   private boolean checkDeviceExistance(Device connectedDevice) {
     boolean deviceExists = false;
-    for (Device device : devices) {
+    for (Device device : DEVICES) {
       if (connectedDevice.getId().equals(device.getId())) {
         deviceExists = true;
       }
@@ -129,7 +132,7 @@ public class AndroidWiFiADB {
     return adb.isInstalled();
   }
 
-  private void showConnectionResultNotification(List<Device> devices) {
+  private void showConnectionResultNotification(Collection<Device> devices) {
     for (Device device : devices) {
       if (device.isConnected()) {
         view.showConnectedDeviceNotification(device);
@@ -139,7 +142,7 @@ public class AndroidWiFiADB {
     }
   }
 
-  private void showDisconnectionResultNotification(List<Device> devices) {
+  private void showDisconnectionResultNotification(Collection<Device> devices) {
     for (Device device : devices) {
       if (!device.isConnected()) {
         view.showDisconnectedDeviceNotification(device);
