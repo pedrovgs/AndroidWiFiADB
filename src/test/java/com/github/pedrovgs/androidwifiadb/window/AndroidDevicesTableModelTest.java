@@ -49,92 +49,92 @@ public class AndroidDevicesTableModelTest extends UnitTest {
 
   @Test
   public void shouldAddDevice() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
-    assertNull(sut.get(0));
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
+    assertNull(androidDevicesTableModel.get(0));
 
     Device device = givenAnyDevice();
-    sut.add(device);
+    androidDevicesTableModel.add(device);
 
-    assertEquals(device, sut.get(0));
+    assertEquals(device, androidDevicesTableModel.get(0));
   }
 
   @Test
   public void shouldClearDevicesList() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
-    sut.add(givenAnyDevice());
+    androidDevicesTableModel.add(givenAnyDevice());
 
-    assertEquals(1, sut.getRowCount());
-    sut.clear();
-    assertEquals(0, sut.getRowCount());
+    assertEquals(1, androidDevicesTableModel.getRowCount());
+    androidDevicesTableModel.clear();
+    assertEquals(0, androidDevicesTableModel.getRowCount());
   }
 
   @Test
   public void shouldReturnValueDeviceAsStringForDeviceColumn() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
     Device device = givenAnyDevice();
-    sut.add(device);
+    androidDevicesTableModel.add(device);
 
-    assertEquals(device.toString(), sut.getValueAt(0, COLUMN_DEVICE));
+    assertEquals(device.toString(), androidDevicesTableModel.getValueAt(0, COLUMN_DEVICE));
   }
 
   @Test
   public void shouldReturnValueConnectedStringForConnectedDevice() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
     Device device = givenAnyDevice();
     device.setConnected(true);
-    sut.add(device);
+    androidDevicesTableModel.add(device);
 
-    assertEquals(CONNECTED, sut.getValueAt(0, COLUMN_STATE));
+    assertEquals(CONNECTED, androidDevicesTableModel.getValueAt(0, COLUMN_STATE));
   }
 
   @Test
   public void shouldReturnValueDisconnectedStringForDisconnectedDevice() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
     Device device = givenAnyDevice();
     device.setConnected(false);
-    sut.add(device);
+    androidDevicesTableModel.add(device);
 
-    assertEquals(DISCONNECTED, sut.getValueAt(0, COLUMN_STATE));
+    assertEquals(DISCONNECTED, androidDevicesTableModel.getValueAt(0, COLUMN_STATE));
   }
 
   @Test
   public void shouldReturnNullValueForActionColumn() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
-    sut.add(givenAnyDevice());
+    androidDevicesTableModel.add(givenAnyDevice());
 
-    assertEquals(null, sut.getValueAt(0, COLUMN_ACTION));
+    assertEquals(null, androidDevicesTableModel.getValueAt(0, COLUMN_ACTION));
   }
 
   @Test
   public void shouldReturnNullValueForUnknownColumn() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
-    sut.add(givenAnyDevice());
+    androidDevicesTableModel.add(givenAnyDevice());
 
-    assertEquals(null, sut.getValueAt(0, COLUMN_WITH_NOT_VALID_INDEX));
+    assertEquals(null, androidDevicesTableModel.getValueAt(0, COLUMN_WITH_NOT_VALID_INDEX));
   }
 
   @Test
   public void shouldReturnEditableCellForActionColumn() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
-    sut.add(givenAnyDevice());
+    androidDevicesTableModel.add(givenAnyDevice());
 
-    assertFalse(sut.isCellEditable(0, COLUMN_STATE) || sut.isCellEditable(0, COLUMN_DEVICE));
-    assertTrue(sut.isCellEditable(0, COLUMN_ACTION));
+    assertFalse(androidDevicesTableModel.isCellEditable(0, COLUMN_STATE) || androidDevicesTableModel.isCellEditable(0, COLUMN_DEVICE));
+    assertTrue(androidDevicesTableModel.isCellEditable(0, COLUMN_ACTION));
   }
 
   @Test
   public void shouldFireCellUpdateOnlyForActionColumn() throws Exception {
-    AndroidDevicesTableModel sut = givenEmptyDevicesTableModel();
+    AndroidDevicesTableModel androidDevicesTableModel = givenEmptyDevicesTableModel();
 
-    sut.addTableModelListener(tableModelListener);
-    sut.setValueAt(anyObject(), 0, COLUMN_ACTION);
+    androidDevicesTableModel.addTableModelListener(tableModelListener);
+    androidDevicesTableModel.setValueAt(anyObject(), 0, COLUMN_ACTION);
 
     verify(tableModelListener, atLeastOnce()).tableChanged((TableModelEvent) anyObject());
   }
