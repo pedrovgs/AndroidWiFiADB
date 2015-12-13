@@ -18,7 +18,6 @@ package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.view.View;
-import com.intellij.openapi.project.Project;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,10 +67,6 @@ public class AndroidWiFiADB {
 
   public List<Device> getDevices() {
     return devices;
-  }
-
-  public void updateProject(Project project) {
-    this.adb.updateProject(project);
   }
 
   public void connectDevice(Device device) {

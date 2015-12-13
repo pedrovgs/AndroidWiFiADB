@@ -17,10 +17,7 @@
 package com.github.pedrovgs.androidwifiadb.adb;
 
 import com.github.pedrovgs.androidwifiadb.Device;
-import com.intellij.openapi.project.Project;
-
 import com.intellij.util.EnvironmentUtil;
-
 import java.io.File;
 import java.util.List;
 
@@ -33,7 +30,6 @@ public class ADB {
 
   private final CommandLine commandLine;
   private final ADBParser adbParser;
-  private Project project;
 
   public ADB(CommandLine commandLine, ADBParser adbParser) {
     this.commandLine = commandLine;
@@ -74,10 +70,6 @@ public class ADB {
     return devices;
   }
 
-  public void updateProject(Project project) {
-    this.project = project;
-  }
-
   private boolean connectDeviceByIp(Device device) {
     String deviceIp = !device.getIp().isEmpty() ? device.getIp() : getDeviceIp(device);
     if (deviceIp.isEmpty()) {
@@ -110,7 +102,7 @@ public class ADB {
   private boolean checkTCPCommandExecuted() {
     String getPropCommand = getCommand("adb shell getprop | grep adb");
     String getPropOutput = commandLine.executeCommand(getPropCommand);
-    String adbTcpPort =  adbParser.parseAdbServiceTcpPort(getPropOutput);
+    String adbTcpPort = adbParser.parseAdbServiceTcpPort(getPropOutput);
     return TCPIP_PORT.equals(adbTcpPort);
   }
 

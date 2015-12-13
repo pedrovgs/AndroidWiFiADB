@@ -37,7 +37,6 @@ public class AndroidWiFiADBAction extends AnAction {
   }
 
   public void actionPerformed(final AnActionEvent event) {
-    this.androidWifiADB.updateProject(event.getProject());
     ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
       public void run() {
         androidWifiADB.connectDevices();
