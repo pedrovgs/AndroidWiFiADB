@@ -21,6 +21,7 @@ import com.github.pedrovgs.androidwifiadb.view.View;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,12 +29,11 @@ public class AndroidWiFiADB {
 
   private final ADB adb;
   private final View view;
-  private final Set<Device> devices;
+  private static final Set<Device> devices = new LinkedHashSet<Device>();
 
   public AndroidWiFiADB(ADB adb, View view) {
     this.adb = adb;
     this.view = view;
-    this.devices = new LinkedHashSet<Device>();
   }
 
   public void connectDevices() {
@@ -56,6 +56,7 @@ public class AndroidWiFiADB {
     if (!isADBInstalled()) {
       return false;
     }
+    removeNotConnectedDevices();
     final Collection<Device> connected = adb.getDevicesConnectedByUSB();
     for (Device connectedDevice : connected) {
       if (!checkDeviceExistance(connectedDevice)) {
@@ -66,6 +67,17 @@ public class AndroidWiFiADB {
       }
     }
     return true;
+  }
+
+  private void removeNotConnectedDevices() {
+    List<Device> connectedDevices = new LinkedList<Device>();
+    for (Device device : devices){
+        if (device.isConnected()){
+          connectedDevices.add(device);
+        }
+    }
+    devices.clear();
+    devices.addAll(connectedDevices);
   }
 
   public Collection<Device> getDevices() {
