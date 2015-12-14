@@ -2,9 +2,9 @@
 <idea-plugin version="2">
   <id>com.github.pedrovgs.androidwifiadb</id>
   <name>Android WiFi ADB</name>
-  <version>2.1-SNAPSHOT</version>
-  <vendor email="pedrovicente.gomez@gmail.com" url="http://www.github.com/pedrovgs">
-    Pedro Vicente Gómez Sánchez
+  <version>2.1</version>
+  <vendor email="pedro@karumi.com" url="http://www.github.com/pedrovgs">
+    Pedro Vicente Gomez Sanchez
   </vendor>
 
   <description><![CDATA[
@@ -20,7 +20,8 @@
       1.0: Initial version.<br>
       1.1: Fixes for Windows and Linux.<br>
       1.2: Remove the usage of the ANDROID_HOME environment variable. This variable is not needed now.<br>
-      2.0: Add a new Android WiFi ADB control panel showing all the devices connected by USB to be able to connect/disconnect devices individually.
+      2.0: Add a new Android WiFi ADB control panel showing all the devices connected by USB to be able to connect/disconnect devices individually.<br>
+      2.1: Fix bug associated to some device installations where the adb installation was not recognized.
     ]]>
   </change-notes>
 
