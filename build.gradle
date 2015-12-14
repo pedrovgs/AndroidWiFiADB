@@ -14,7 +14,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'jacoco'
 
 group 'com.github.pedrovgs'
-version '2.1'
+version '2.2-SNAPSHOT'
 
 sourceCompatibility = 1.6
 
