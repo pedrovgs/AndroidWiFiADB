@@ -16,11 +16,11 @@
 
 package com.github.pedrovgs.androidwifiadb.window;
 
+import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
+import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.adb.ADBParser;
-import com.github.pedrovgs.androidwifiadb.AndroidWiFiADB;
 import com.github.pedrovgs.androidwifiadb.adb.CommandLine;
-import com.github.pedrovgs.androidwifiadb.Device;
 import com.github.pedrovgs.androidwifiadb.view.NotificationView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
@@ -28,7 +28,6 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
-
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
@@ -38,8 +37,8 @@ public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
   private static final int INTERVAL_REFRESH_DEVICES = 1000;
 
   private final AndroidWiFiADB androidWifiADB;
-  private JPanel toolWindowContent;
   private final CardLayoutDevices cardLayoutDevices;
+  private JPanel toolWindowContent;
 
   public AndroidWiFiADBWindow() {
     CommandLine commandLine = new CommandLine();
@@ -50,6 +49,7 @@ public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
   }
 
   @Override public void createToolWindowContent(Project project, ToolWindow toolWindow) {
+    androidWifiADB.updateProject(project);
     createToolWindowContent(toolWindow);
     setupUI();
     monitorDevices();
@@ -81,8 +81,7 @@ public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
 
   private void setupUI() {
     ApplicationManager.getApplication().invokeLater(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         cardLayoutDevices.createAndShowGUI();
       }
     });
@@ -105,8 +104,7 @@ public class AndroidWiFiADBWindow implements ToolWindowFactory, DeviceAction {
 
   private void updateUi() {
     ApplicationManager.getApplication().invokeLater(new Runnable() {
-      @Override
-      public void run() {
+      @Override public void run() {
         cardLayoutDevices.setDevices(androidWifiADB.getDevices());
         cardLayoutDevices.updateUi();
       }

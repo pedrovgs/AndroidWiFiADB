@@ -18,6 +18,7 @@ package com.github.pedrovgs.androidwifiadb;
 
 import com.github.pedrovgs.androidwifiadb.adb.ADB;
 import com.github.pedrovgs.androidwifiadb.view.View;
+import com.intellij.openapi.project.Project;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -112,6 +113,10 @@ public class AndroidWiFiADB {
       updateDeviceConnectionState(disconnected);
     }
     showDisconnectionResultNotification(disconnectedDevices);
+  }
+
+  public void updateProject(Project project) {
+    adb.updateProject(project);
   }
 
   private void updateDeviceConnectionState(final Device updatedDevice) {
