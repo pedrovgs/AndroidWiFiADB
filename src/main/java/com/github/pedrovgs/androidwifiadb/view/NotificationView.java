@@ -39,13 +39,15 @@ public class NotificationView implements View {
 
   @Override public void showErrorConnectingDeviceNotification(Device device) {
     showNotification(
-        "Unable to connect device '" + device.getName() + "'. Review your WiFi connection.",
+        "Unable to connect to device '" + device.getName() + "'. Make sure that your computer and your "
+        + "device are connected to the same WiFi network.",
         NotificationType.INFORMATION);
   }
 
   @Override public void showErrorDisconnectingDeviceNotification(Device device) {
     showNotification(
-        "Unable to disconnect device '" + device.getName() + "'. Review your WiFi connection.",
+        "Unable to disconnect device '" + device.getName() + "'. Make sure that your computer and your "
+        + "device are connected to the same WiFi network.",
         NotificationType.INFORMATION);
   }
 
