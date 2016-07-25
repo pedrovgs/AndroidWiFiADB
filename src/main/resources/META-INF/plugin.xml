@@ -59,6 +59,7 @@
         project-type="Android"
         >
       <add-to-group group-id="MainToolBar" anchor="last"/>
+      <add-to-group group-id="NavBarToolBar" anchor="first"/>
     </action>
 
   </actions>
