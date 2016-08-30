@@ -2,7 +2,7 @@
 <idea-plugin version="2">
   <id>com.github.pedrovgs.androidwifiadb</id>
   <name>Android WiFi ADB</name>
-  <version>2.4-SNAPSHOT</version>
+  <version>2.4</version>
   <vendor email="pedrovicente.gomez at gmail dot com" url="http://www.github.com/pedrovgs">
     Pedro Vicente Gomez Sanchez
   </vendor>
@@ -17,6 +17,7 @@
   </description>
 
   <change-notes><![CDATA[
+      2.4: Generate the plugin binary using Java 1.6 instead of Java 1.8.
       2.3: Update the main action configuration to be shown in the NavBarToolBar and also in the MainToolBar if the first on is disabled.<br>
       2.2: Update error message shown when the device is not properly connected.<br>
       2.1: Fix bug associated to some device installations where the adb installation was not recognized.<br>
