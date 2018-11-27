@@ -21,7 +21,7 @@ Devices dashboard:
 Usage
 -----
 
-Connect your device to your computer using a USB cable. Then press the button and disconnect your USB once the plugin connects your device over WiFi. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection.
+Connect your device to your computer using a USB cable. Then press the button, and a notification will pop up saying that the phone has been connected. Disconnect your USB once the plugin shows your device is connected. Open the Android WiFi ADB tab at the right side to see all the devices and manage your connections. Your device will be connected over WiFi now. You can now deploy, run and debug your device using your WiFi connection. Remember that your device and your computer have to be in the same WiFi connection. Also, you have to first connect your device with a USB every time you open Android Studio, for setting up the connection over WiFi.
   
 If you want to handle your devices connection individually, open the Android WiFi ADB dashboard you will find at the right of your IDE.  
 
