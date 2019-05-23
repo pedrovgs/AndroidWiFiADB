@@ -8,7 +8,7 @@ Android WiFi ADB - IntelliJ/Android Studio Plugin [![Android Arsenal](https://im
 
 *To use this plugin the project opened in your IntelliJ/Android Studio has to be an Android project configured with the Android SDK.*
 
-**Archived repository:** Maintaining this project up to date for all the different Android devices without having access to the physical device is not possible at all right now. Most of the bugs reported ar related to the adb installation and not to the plugin code so this repository will keep archived for now.
+**Archived repository:** Maintaining this project up to date for all the different Android devices without having access to the physical devices is not possible at all right now. Most of the bugs reported ar related to the adb installation and not to the plugin code so this repository will keep archived for now.
 
 Screenshots
 -----------
